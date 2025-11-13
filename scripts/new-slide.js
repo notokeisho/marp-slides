@@ -35,8 +35,11 @@ async function createNewSlide() {
         return stat.isDirectory();
       });
 
-    if (themes.length === 0) {
-      console.error('❌ Error: No themes found in themes/ directory');
+    // defaultテーマを追加して、先頭に配置
+    const allThemes = ['default', ...themes.filter(t => t !== 'default')];
+
+    if (allThemes.length === 0) {
+      console.error('❌ Error: No themes found');
       process.exit(1);
     }
 
@@ -46,7 +49,7 @@ async function createNewSlide() {
         type: 'list',
         name: 'theme',
         message: 'Select theme:',
-        choices: themes,
+        choices: allThemes,
       },
     ]);
 
