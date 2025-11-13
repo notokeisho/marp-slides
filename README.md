@@ -40,15 +40,21 @@ marp-slides/
 
 ## 🚀 セットアップ
 
-### 1. Marp CLIのインストール
+### 1. 必要なツールのインストール
 
 ```bash
-# Makefileを使う場合
+# npmパッケージをインストール
 make install
 
-# 手動でインストールする場合
-npm install -g @marp-team/marp-cli
+# または直接npm installでも可
+npm install
 ```
+
+**インストールされるもの:**
+- **Marp CLI**: Markdownからスライドを生成（開発依存）
+- **inquirer**: インタラクティブなスライド作成UI（開発依存）
+
+> **Note:** `make new`コマンドでは、Node.js製のインタラクティブUIが使用され、ファイル名入力とテーマ選択をNext.jsセットアップのような矢印キー操作で行えます。
 
 ### 2. リポジトリのクローン
 
@@ -56,6 +62,23 @@ npm install -g @marp-team/marp-cli
 git clone <repository-url>
 cd marp-slides
 ```
+
+### 3. VS Code拡張機能のインストール（推奨）
+
+VS Codeでリポジトリを開くと、推奨拡張機能のインストールを促すメッセージが表示されます。
+
+**必須拡張機能:**
+- **Marp for VS Code** (`marp-team.marp-vscode`)
+  - Markdownファイルのリアルタイムプレビュー
+  - カスタムテーマ（gradient, darkmode）の使用
+
+**手動インストール:**
+```bash
+# VS Codeのコマンドパレット (Cmd+Shift+P / Ctrl+Shift+P) で:
+ext install marp-team.marp-vscode
+```
+
+または [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode) から直接インストール
 
 ## ✍️ スライドの作成方法
 
