@@ -1,0 +1,3 @@
+themeSet:
+  - ./themes/gradient/gradient.css
+  - ./themes/darkmode/darkmode.css
