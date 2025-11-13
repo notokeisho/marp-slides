@@ -50,17 +50,32 @@ dist/                       # 生成物（Git管理対象外）
 
 ### Marp設定
 
-- **VS Code統合**: `.vscode/settings.json`でMarp for VS Code拡張機能用にテーマパスを登録
+- **VS Code統合**:
+  - `.vscode/extensions.json`: 推奨拡張機能リスト（Marp for VS Code）
+  - `.vscode/settings.json`: Marp for VS Code拡張機能用にテーマパスを登録
 - **CLI設定**: `.marprc.yml`でコマンドライン用にテーマを登録
 - **ビルドオプション**: すべてのビルドで`--allow-local-files`フラグを使用してローカル画像参照を許可
+
+### 必須拡張機能
+
+**Marp for VS Code** (`marp-team.marp-vscode`)
+- リポジトリを開くと自動的にインストールを提案
+- `.vscode/extensions.json`に定義済み
+- カスタムテーマ（gradient, darkmode）を使用するために必須
+- 拡張機能なしでは`.vscode/settings.json`のテーマ設定が機能しない
 
 ## よく使うコマンド
 
 ### セットアップ
 
 ```bash
-make install              # Marp CLIをグローバルインストール (npm install -g @marp-team/marp-cli)
+make install              # npmパッケージのインストール (Marp CLI, inquirer)
+npm install               # 上記と同じ
 ```
+
+**インストールされるもの:**
+- **@marp-team/marp-cli**: Markdownからスライドを生成
+- **inquirer**: `make new`でのインタラクティブUI（Next.jsライクな矢印キー操作）
 
 ### スライドのビルド
 
@@ -86,9 +101,14 @@ make clean                # dist/内のすべての生成ファイルを削除
 ### インタラクティブ作成（推奨）
 
 1. `make new` を実行
-2. ファイル名を入力
-3. テーマを選択（矢印キーで選択、Enterで確定）
+2. ファイル名を入力（拡張子なし）
+3. テーマを矢印キーで選択（Next.jsライクなUI）
 4. `slides/[filename].md` が自動生成される
+
+**UIの特徴:**
+- inquirer（Node.js）を使用したNext.jsスタイルのインタラクティブUI
+- 矢印キーでテーマ選択、Enterで確定
+- ファイル名の重複チェックと検証
 
 ### 手動作成
 
