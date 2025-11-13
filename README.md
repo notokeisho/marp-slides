@@ -19,9 +19,9 @@ marp-slides/
 │  └─ darkmode/
 │     └─ darkmode.css      # Darkmodeテーマ
 │
-├─ slides/                 # 各メンバーのスライドソース(.md)
-│  ├─ keisho/
-│  └─ sample-user/
+├─ slides/                 # スライドソース(.md)
+│  ├─ example.md
+│  └─ presentation.md
 │
 ├─ assets/                 # 共通画像・素材
 │
@@ -59,23 +59,25 @@ cd marp-slides
 
 ## ✍️ スライドの作成方法
 
-### 1. 自分のディレクトリを作成
+### インタラクティブ作成（推奨）
 
 ```bash
-mkdir slides/your-name
+make new
 ```
 
-### 2. テンプレートをコピー
+ファイル名とテーマを選択するだけで新しいスライドが作成されます。
+
+### 手動作成
 
 ```bash
 # Gradientテーマを使う場合
-cp templates/gradient/template.md slides/your-name/my-presentation.md
+cp templates/gradient/template.md slides/my-presentation.md
 
 # Darkmodeテーマを使う場合
-cp templates/darkmode/template.md slides/your-name/my-presentation.md
+cp templates/darkmode/template.md slides/my-presentation.md
 ```
 
-### 3. Markdownでスライドを編集
+### Markdownでスライドを編集
 
 ```markdown
 ---
@@ -128,7 +130,7 @@ make html
 ### 特定のファイルだけビルド
 
 ```bash
-make build-one FILE=slides/keisho/example.md
+make build-one FILE=slides/example.md
 ```
 
 ### 生成物の削除
@@ -258,21 +260,22 @@ footer: "フッターテキスト"
 ### ワークフロー例
 
 ```bash
-# 1. 自分のブランチを作成
-git checkout -b slides/your-name/new-presentation
+# 1. ブランチを作成
+git checkout -b feature/new-presentation
 
-# 2. スライドを作成・編集
-vim slides/your-name/presentation.md
+# 2. スライドを作成
+make new
+# または手動で: vim slides/presentation.md
 
 # 3. ローカルでビルド確認
-make build-one FILE=slides/your-name/presentation.md
+make build-one FILE=slides/presentation.md
 
 # 4. コミット
-git add slides/your-name/presentation.md
+git add slides/presentation.md
 git commit -m "Add: New presentation about XYZ"
 
 # 5. プッシュ
-git push origin slides/your-name/new-presentation
+git push origin feature/new-presentation
 
 # 6. Pull Request作成
 ```
@@ -314,7 +317,7 @@ npm install -g @marp-team/marp-cli
 
 ## 🤝 コントリビューション
 
-1. 自分のディレクトリ（`slides/your-name/`）内で自由に作業
+1. `make new` でスライドを作成して編集
 2. 新しいテーマを追加する場合は `themes/new-theme/` を作成してPR
 3. テンプレートを改善する場合は各テーマのテンプレートを編集してPR
 
