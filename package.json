@@ -1,0 +1,16 @@
+{
+  "name": "marp-slides",
+  "version": "1.0.0",
+  "description": "Marp slides repository with interactive slide creation",
+  "private": true,
+  "scripts": {
+    "new": "node scripts/new-slide.js"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.0.0",
+    "inquirer": "^9.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
