@@ -1,0 +1,114 @@
+/* @theme darkmode */
+
+@import "gaia"; /* start from Marp's dark-friendly base */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+:root {
+  font-family: "Noto Sans JP", Inter, Helvetica, Arial, sans-serif;
+  color: #f4f4f8;
+  background-color: #10121a;
+}
+
+section {
+  background: radial-gradient(
+    circle at top,
+    rgba(75, 105, 255, 0.65),
+    rgba(16, 18, 26, 0.95)
+  );
+  color: #f4f4f8;
+  font-size: 26px;
+  padding: 60px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #a5c9ff;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 38px;
+  font-weight: 700;
+  border-left: 8px solid #6dd5fa;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+a {
+  color: #76e4ff;
+}
+
+code {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffefc1;
+}
+
+pre {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+section::after {
+  font-size: 0.75em;
+  color: #a8b8e6;
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.columns > div {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(118, 228, 255, 0.2);
+}
+
+.columns h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #9fd6ff;
+  border-bottom: 2px solid rgba(118, 228, 255, 0.4);
+  padding-bottom: 8px;
+}
+
+.columns p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #d9e4ff;
+}
+
+section.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.ending {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 48px;
+  color: #f4f4f8;
+}

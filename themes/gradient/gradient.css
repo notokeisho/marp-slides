@@ -1,0 +1,156 @@
+/* @theme gradient */
+
+@import "default";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+:root {
+  font-family: "Noto Sans JP", Inter, Helvetica, Arial, sans-serif;
+}
+
+section {
+  background-color: #ffffff;
+  background-image: linear-gradient(40deg, #e2bee2ad 0%, #a7e1e7ad 100%);
+  font-size: 26px;
+  padding: 60px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #842174;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 700;
+  border-left: 8px solid #9d30a6;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+a {
+  color: #9d30a6;
+}
+
+code {
+  background-color: rgba(146, 146, 146, 0.2);
+}
+
+pre {
+  background-color: #ece1ecad;
+}
+
+/* https://github.com/yhatt/marp/issues/263 */
+section::after {
+  font-size: 0.75em;
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+}
+
+/* the "center" keyword centers the image - may break, careful */
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.columns > div {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 32px 0 rgba(132, 33, 116, 0.15);
+  border: 1px solid rgba(157, 48, 166, 0.2);
+}
+
+.columns h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #842174;
+  border-bottom: 2px solid rgba(157, 48, 166, 0.5);
+  padding-bottom: 8px;
+}
+
+.columns p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333333;
+}
+
+strong {
+  color: #842174;
+  font-weight: 700;
+}
+
+ol,
+ul {
+  font-size: 28px;
+  line-height: 1.8;
+}
+
+section.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section.ending {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 48px;
+}
+
+/* || SECTION CLASS: blue */
+section.blue {
+  background-color: #ffffff;
+  background-image: linear-gradient(to bottom right, #cadaf7 0%, #87a7e4 100%);
+}
+
+section.blue > h1,
+section.blue > h2,
+section.blue > h3,
+section.blue > h4,
+section.blue > h5,
+section.blue > h6 {
+  color: #214484;
+}
+
+section.blue > a {
+  color: #303ca6;
+}
+
+section.blue::after,
+section.blue > footer,
+section.blue > header {
+  color: #303ca6;
+}
+
+/* || SECTION CLASS: tinytext */
+/* new class that makes p, ul, and blockquote text smaller */
+/* might be useful for the References slide, use <!-- _class: tinytext --> */
+section.tinytext > p,
+section.tinytext > ul,
+section.tinytext > blockquote {
+  font-size: 0.65em;
+}
