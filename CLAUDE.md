@@ -11,7 +11,9 @@
 ### ディレクトリ構造の設計思想
 
 ```
-slides/[username]/          # 個人のスライドソース（Git管理対象）
+slides/                     # スライドソース（Git管理対象）
+  ├─ example.md
+  └─ presentation.md
 templates/                  # テーマ別テンプレート（Git管理対象）
   ├─ gradient/
   │  └─ template.md
@@ -24,7 +26,7 @@ assets/                     # 共有画像・リソース（Git管理対象）
 dist/                       # 生成物（Git管理対象外）
 ```
 
-**重要な設計原則**: スライドはトピックではなくユーザー名で整理されます。各チームメンバーは`slides/`配下に独自のディレクトリを持ちます。
+**重要な設計原則**: スライドは`slides/`ディレクトリ直下に配置されます。
 
 ### テーマシステム
 
@@ -63,27 +65,37 @@ make install              # Marp CLIをグローバルインストール (npm in
 ### スライドのビルド
 
 ```bash
+make install              # Marp CLIをグローバルインストール
+make new                  # 新規スライド作成（インタラクティブ）
 make build                # すべてのスライドを全形式でビルド（PDF、PPTX、HTML）
 make pdf                  # PDFのみビルド
 make pptx                 # PowerPointのみビルド
 make html                 # HTMLのみビルド
-make build-one FILE=slides/username/presentation.md  # 単一ファイルをビルド（全形式）
+make build-one FILE=slides/presentation.md  # 単一ファイルをビルド（全形式）
 make clean                # dist/内のすべての生成ファイルを削除
 ```
 
 ### ビルド動作
 
-- `slides/*/*.md`を反復処理（2階層のディレクトリ構造が必要）
-- 出力ファイル名: `[username]-[filename].[拡張子]`
-- 例: `slides/keisho/demo.md` → `dist/pdf/keisho-demo.pdf`
+- `slides/*.md`を反復処理
+- 出力ファイル名: `[filename].[拡張子]`
+- 例: `slides/demo.md` → `dist/pdf/demo.pdf`
 
 ## 新しいスライドの作成
 
-1. ユーザーディレクトリを作成: `mkdir slides/your-name`
-2. テンプレートをコピー:
-   - Gradientテーマ: `cp templates/gradient/template.md slides/your-name/presentation.md`
-   - Darkmodeテーマ: `cp templates/darkmode/template.md slides/your-name/presentation.md`
-3. 内容を編集してビルド: `make build-one FILE=slides/your-name/presentation.md`
+### インタラクティブ作成（推奨）
+
+1. `make new` を実行
+2. ファイル名を入力
+3. テーマを選択（矢印キーで選択、Enterで確定）
+4. `slides/[filename].md` が自動生成される
+
+### 手動作成
+
+1. テンプレートをコピー:
+   - Gradientテーマ: `cp templates/gradient/template.md slides/presentation.md`
+   - Darkmodeテーマ: `cp templates/darkmode/template.md slides/presentation.md`
+2. 内容を編集してビルド: `make build-one FILE=slides/presentation.md`
 
 ## Marp固有のパターン
 
@@ -127,7 +139,7 @@ make clean                # dist/内のすべての生成ファイルを削除
 **コミット対象**: `slides/`内のMarkdownファイル、`themes/`内のテーマファイル、templates、assets
 **無視対象**: `dist/`内のすべて、`node_modules/`、OSファイル
 
-ブランチ命名規則: `slides/username/presentation-name`
+ブランチ命名規則: `feature/presentation-name`
 
 ## 重要な注意事項
 
