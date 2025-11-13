@@ -1,0 +1,27 @@
+# Marp生成物
+dist/pdf/*
+dist/pptx/*
+dist/html/*
+
+# .gitkeepは残す
+!dist/pdf/.gitkeep
+!dist/pptx/.gitkeep
+!dist/html/.gitkeep
+
+# Node modules (Marp CLI)
+node_modules/
+package-lock.json
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+
+# エディタ設定
+.idea/
+*.swp
+*.swo
+*~
+
+# 一時ファイル
+*.tmp
+*.log
