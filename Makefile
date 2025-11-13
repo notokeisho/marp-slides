@@ -1,6 +1,6 @@
 # Marp Slides Management Makefile
 
-.PHONY: help build pdf pptx html clean install
+.PHONY: help build pdf pptx html clean install check-marp
 
 # デフォルトターゲット
 help:
@@ -20,12 +20,20 @@ install:
 	@echo "Installing Marp CLI..."
 	npm install -g @marp-team/marp-cli
 
+# Marp CLI チェック
+check-marp:
+	@command -v marp >/dev/null 2>&1 || { \
+		echo "❌ ERROR: marp not found"; \
+		echo "Run: make install"; \
+		exit 1; \
+	}
+
 # 全形式ビルド
 build: pdf pptx html
 	@echo "✅ All formats built successfully"
 
 # PDF生成
-pdf:
+pdf: check-marp
 	@echo "Building PDF files..."
 	@mkdir -p dist/pdf
 	@for file in slides/*/*.md; do \
@@ -38,7 +46,7 @@ pdf:
 	done
 
 # PowerPoint生成
-pptx:
+pptx: check-marp
 	@echo "Building PowerPoint files..."
 	@mkdir -p dist/pptx
 	@for file in slides/*/*.md; do \
@@ -51,7 +59,7 @@ pptx:
 	done
 
 # HTML生成
-html:
+html: check-marp
 	@echo "Building HTML files..."
 	@mkdir -p dist/html
 	@for file in slides/*/*.md; do \
@@ -64,7 +72,7 @@ html:
 	done
 
 # 単一ファイルビルド
-build-one:
+build-one: check-marp
 	@if [ -z "$(FILE)" ]; then \
 		echo "❌ Error: FILE parameter required"; \
 		echo "Usage: make build-one FILE=slides/user/example.md"; \
