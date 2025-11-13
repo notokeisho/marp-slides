@@ -16,10 +16,14 @@ help:
 	@echo "Single file build:"
 	@echo "  make build-one FILE=slides/example.md"
 
-# Marp CLI インストール
+# 必要なツールをインストール
 install:
-	@echo "Installing Marp CLI..."
-	npm install -g @marp-team/marp-cli
+	@echo "📦 Installing dependencies..."
+	@echo ""
+	@echo "Installing npm packages (Marp CLI, inquirer)..."
+	npm install
+	@echo ""
+	@echo "✅ Installation complete!"
 
 # Marp CLI チェック
 check-marp:
@@ -31,30 +35,7 @@ check-marp:
 
 # 新規スライド作成
 new:
-	@echo "📝 Creating new Marp slide..."
-	@read -p "Enter filename (without .md): " filename; \
-	if [ -z "$$filename" ]; then \
-		echo "❌ Error: Filename cannot be empty"; \
-		exit 1; \
-	fi; \
-	if [ -f "slides/$$filename.md" ]; then \
-		echo "❌ Error: slides/$$filename.md already exists"; \
-		exit 1; \
-	fi; \
-	themes=$$(ls -1 themes/ | grep -v '.gitkeep'); \
-	echo ""; \
-	echo "Select theme:"; \
-	select theme in $$themes; do \
-		if [ -n "$$theme" ]; then \
-			cp "templates/$$theme/template.md" "slides/$$filename.md"; \
-			echo ""; \
-			echo "✅ Created: slides/$$filename.md"; \
-			echo "   Theme: $$theme"; \
-			break; \
-		else \
-			echo "❌ Invalid selection"; \
-		fi; \
-	done
+	@node scripts/new-slide.js
 
 # 全形式ビルド
 build: pdf pptx html
