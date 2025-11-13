@@ -30,20 +30,25 @@ dist/                       # 生成物（Git管理対象外）
 
 ### テーマシステム
 
-2つのカスタムMarpテーマが定義されています：
+3つのテーマが利用可能です：
 
-1. **gradient** (`themes/gradient/gradient.css`)
+1. **default** (Marp標準テーマ)
+   - Marpのデフォルトテーマ
+   - シンプルで汎用的なデザイン
+   - 使用方法: Front Matterで`theme: default`
+
+2. **gradient** (`themes/gradient/gradient.css`)
    - グラデーションオーバーレイ付き明るい背景
    - 紫色のカラースキーム (#842174)
    - 使用方法: Front Matterで`theme: gradient`
 
-2. **darkmode** (`themes/darkmode/darkmode.css`)
+3. **darkmode** (`themes/darkmode/darkmode.css`)
    - 放射状グラデーション付きダーク背景
    - 青色のカラースキーム (#a5c9ff)
    - Marpの"gaia"テーマをベースにしている
    - 使用方法: Front Matterで`theme: darkmode`
 
-両テーマ共通：
+カスタムテーマ（gradient, darkmode）の共通点：
 - Google Fonts（Inter、Noto Sans JP）をインポート
 - `.vscode/settings.json`と`.marprc.yml`に登録されている
 - CSSファイルの先頭で`@theme [名前]`を使用する必要がある
@@ -113,6 +118,7 @@ make clean                # dist/内のすべての生成ファイルを削除
 ### 手動作成
 
 1. テンプレートをコピー:
+   - Defaultテーマ: `cp templates/default/template.md slides/presentation.md`
    - Gradientテーマ: `cp templates/gradient/template.md slides/presentation.md`
    - Darkmodeテーマ: `cp templates/darkmode/template.md slides/presentation.md`
 2. 内容を編集してビルド: `make build-one FILE=slides/presentation.md`
