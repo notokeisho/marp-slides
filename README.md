@@ -1,7 +1,7 @@
 # Marp Slides - チーム用スライド管理リポジトリ
 
 Marp（Markdown Presentation Ecosystem）を使ったスライド共同管理リポジトリです。
-Markdownでスライドを書き、PDF/PowerPoint/HTMLに自動変換します。
+Markdown でスライドを書き、PDF/PowerPoint/HTML に自動変換します。
 
 ## 📁 ディレクトリ構造
 
@@ -53,10 +53,11 @@ npm install
 ```
 
 **インストールされるもの:**
-- **Marp CLI**: Markdownからスライドを生成（開発依存）
-- **inquirer**: インタラクティブなスライド作成UI（開発依存）
 
-> **Note:** `make new`コマンドでは、Node.js製のインタラクティブUIが使用され、ファイル名入力とテーマ選択をNext.jsセットアップのような矢印キー操作で行えます。
+- **Marp CLI**: Markdown からスライドを生成（開発依存）
+- **inquirer**: インタラクティブなスライド作成 UI（開発依存）
+
+> **Note:** `make new`コマンドでは、Node.js 製のインタラクティブ UI が使用され、ファイル名入力とテーマ選択を Next.js セットアップのような矢印キー操作で行えます。
 
 ### 2. リポジトリのクローン
 
@@ -65,16 +66,18 @@ git clone <repository-url>
 cd marp-slides
 ```
 
-### 3. VS Code拡張機能のインストール（推奨）
+### 3. VS Code 拡張機能のインストール（推奨）
 
-VS Codeでリポジトリを開くと、推奨拡張機能のインストールを促すメッセージが表示されます。
+VS Code でリポジトリを開くと、推奨拡張機能のインストールを促すメッセージが表示されます。
 
 **必須拡張機能:**
+
 - **Marp for VS Code** (`marp-team.marp-vscode`)
-  - Markdownファイルのリアルタイムプレビュー
+  - Markdown ファイルのリアルタイムプレビュー
   - カスタムテーマ（gradient, darkmode）の使用
 
 **手動インストール:**
+
 ```bash
 # VS Codeのコマンドパレット (Cmd+Shift+P / Ctrl+Shift+P) で:
 ext install marp-team.marp-vscode
@@ -105,7 +108,7 @@ cp templates/gradient/template.md slides/my-presentation.md
 cp templates/darkmode/template.md slides/my-presentation.md
 ```
 
-### Markdownでスライドを編集
+### Markdown でスライドを編集
 
 ```markdown
 ---
@@ -124,14 +127,14 @@ paginate: true
 
 ---
 
-## スライド2
+## スライド 2
 
-- 箇条書き1
-- 箇条書き2
+- 箇条書き 1
+- 箇条書き 2
 
 ---
 
-## スライド3
+## スライド 3
 
 画像の挿入:
 ![width:500px](../../assets/sample.png)
@@ -167,7 +170,7 @@ make build-one FILE=slides/example.md
 make clean
 ```
 
-## 📋 Marp記法の基礎
+## 📋 Marp 記法の基礎
 
 ### スライド区切り
 
@@ -175,7 +178,7 @@ make clean
 ---
 ```
 
-横線3つ（`---`）で次のスライドに移ります。
+横線 3 つ（`---`）で次のスライドに移ります。
 
 ### ヘッダー設定（Front Matter）
 
@@ -204,10 +207,10 @@ footer: "フッターテキスト"
 ```markdown
 ![width:500px](path/to/image.png)
 ![height:300px](path/to/image.png)
-![bg](path/to/background.png)  # 背景画像
+![bg](path/to/background.png) # 背景画像
 ```
 
-### 2カラムレイアウト
+### 2 カラムレイアウト
 
 ```markdown
 <div class="columns">
@@ -233,15 +236,15 @@ footer: "フッターテキスト"
 
 ## 🎨 利用可能なテーマ
 
-### Defaultテーマ
+### Default テーマ
 
-Marpの標準テーマです。シンプルで汎用的なデザインで、どんなプレゼンテーションにも使用できます。
+Marp の標準テーマです。シンプルで汎用的なデザインで、どんなプレゼンテーションにも使用できます。
 
 - **特徴**: ミニマルでクリーンなデザイン
 - **使用場面**: 汎用的なプレゼンテーション、ビジネス用途
 - **カラー**: 黒＋白ベース
 
-### Gradientテーマの特徴
+### Gradient テーマの特徴
 
 ### カラーパレット
 
@@ -252,16 +255,19 @@ Marpの標準テーマです。シンプルで汎用的なデザインで、ど�
 ### スライドタイプ
 
 1. **タイトルスライド** (`_class: title`)
+
    - 全画面グラデーション背景
    - グラデーションテキスト効果
    - 中央揃え
 
 2. **コンテンツスライド** (デフォルト)
+
    - 白背景
    - 上部にグラデーションバー
    - グラデーションカラーの見出し
 
 3. **グラデーションスライド** (`_class: gradient`)
+
    - 全画面グラデーション背景
    - 白色テキスト
    - 強調表現に最適
@@ -280,11 +286,11 @@ Marpの標準テーマです。シンプルで汎用的なデザインで、ど�
 <div class="card">カードスタイルコンテナ</div>
 ```
 
-## 📦 Git運用ルール
+## 📦 Git 運用ルール
 
 ### ✅ コミット対象
 
-- `slides/` 内のMarkdownファイル
+- `slides/` 内の Markdown ファイル
 - `templates/` 内のテンプレートファイル
 - `assets/` 内の共有画像ファイル
 - `gradient.css`, `darkmode.css` テーマファイル
@@ -320,7 +326,7 @@ git push origin feature/new-presentation
 
 ## 🔧 トラブルシューティング
 
-### Marp CLIが見つからない
+### Marp CLI が見つからない
 
 ```bash
 # グローバルインストールを確認
@@ -333,32 +339,28 @@ npm install -g @marp-team/marp-cli
 ### 画像が表示されない
 
 - 相対パスを確認（`../../assets/image.png`）
-- `--allow-local-files` オプションが必要（Makefileに含まれています）
+- `--allow-local-files` オプションが必要（Makefile に含まれています）
 
 ### テーマが適用されない
 
-- Front Matterで `theme: gradient` が正しく設定されているか確認
-- テーマCSSファイルが `gradient.css` に存在するか確認
+- Front Matter で `theme: gradient` が正しく設定されているか確認
+- テーマ CSS ファイルが `gradient.css` に存在するか確認
 - VS Code を再起動してテーマを再読み込み
 
-### VS Codeでプレビューが表示されない
+### VS Code でプレビューが表示されない
 
 - Marp for VS Code 拡張機能がインストールされているか確認
 - `.vscode/settings.json` にテーマパスが正しく設定されているか確認
 
 ## 📚 参考資料
 
-- [Marp公式ドキュメント](https://marpit.marp.app/)
+- [Marp 公式ドキュメント](https://marpit.marp.app/)
 - [Marp CLI](https://github.com/marp-team/marp-cli)
-- [Markdown記法](https://www.markdownguide.org/)
+- [Markdown 記法](https://www.markdownguide.org/)
 - [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)
 
 ## 🤝 コントリビューション
 
 1. `make new` でスライドを作成して編集
-2. 新しいテーマを追加する場合は `themes/new-theme/` を作成してPR
-3. テンプレートを改善する場合は各テーマのテンプレートを編集してPR
-
----
-
-**Happy Presenting! 🎉**
+2. 新しいテーマを追加する場合は `themes/new-theme/` を作成して PR
+3. テンプレートを改善する場合は各テーマのテンプレートを編集して PR
