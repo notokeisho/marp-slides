@@ -9,39 +9,36 @@
 **症状:**
 
 ```bash
-marp: command not found
+❌ ERROR: marp not found
 ```
+
+または、ビルド時にエラーが出る。
 
 **解決方法:**
 
 ```bash
-# グローバルインストールを確認
-npm list -g @marp-team/marp-cli
-
 # 再インストール
-npm install -g @marp-team/marp-cli
-
-# または、プロジェクトローカルで実行
-npx marp --version
+make install
 ```
 
-### npm install が失敗する
+### make install が失敗する
 
 **症状:**
 
-```
-npm ERR! code EACCES
-```
+- 権限エラー
+- インストールに失敗する
 
 **解決方法:**
 
-```bash
-# 権限の問題の場合、sudoを使う（macOS/Linux）
-sudo npm install
+1. **Node.js のバージョンを確認**
 
-# または、Node.jsのバージョンを確認
-node --version  # v18.0.0以上が必要
-```
+   ```bash
+   node --version  # v18.0.0以上が必要
+   ```
+
+2. **古い場合は Node.js を更新**
+
+   [Node.js 公式サイト](https://nodejs.org/)から最新版をインストール
 
 ## VS Code 関連
 
@@ -98,14 +95,11 @@ node --version  # v18.0.0以上が必要
      - ./themes/darkmode/darkmode.css
    ```
 
-3. **ビルド時の確認**
+3. **ビルドで確認**
 
    ```bash
-   # Makefileを使う場合は自動で読み込まれる
+   # Makefileを使えば自動でテーマが読み込まれる
    make pdf
-
-   # 手動でmarpコマンドを使う場合は--theme-setオプションが必要
-   marp --theme-set themes/gradient/gradient.css slides/example.md
    ```
 
 ## ビルド関連
@@ -131,12 +125,12 @@ node --version  # v18.0.0以上が必要
    ![](assets/image.png)
    ```
 
-2. **--allow-local-files オプションの確認**
+2. **make コマンドでビルド**
 
-   Makefile を使っていれば自動で付与されますが、手動でビルドする場合は：
+   `make` コマンドを使用すれば、必要なオプションが自動で付与されます：
 
    ```bash
-   marp --pdf --allow-local-files slides/example.md
+   make build
    ```
 
 ### make コマンドが使えない
@@ -147,7 +141,7 @@ node --version  # v18.0.0以上が必要
 make: command not found
 ```
 
-**解決方法:**
+**推奨解決方法:**
 
 1. **macOS の場合**
 
@@ -158,18 +152,102 @@ make: command not found
 
 2. **Windows の場合**
 
-   - Git Bash を使用
+   - Git Bash を使用（推奨）
    - または [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm) をインストール
 
-3. **直接 npm スクリプトを使う**
+3. **Linux の場合**
 
    ```bash
-   # make newの代わり
-   npm run new
+   # Ubuntu/Debian
+   sudo apt-get install build-essential
 
-   # make buildの代わり
-   npx marp --pdf --allow-local-files slides/*.md -o dist/pdf/
+   # CentOS/RHEL
+   sudo yum groupinstall "Development Tools"
    ```
+
+**代替手段（make を使わない場合）:**
+
+どうしても `make` がインストールできない環境の場合、以下の手動コマンドで代用できます。
+
+#### セットアップ
+
+```bash
+# make installの代わり
+npm install
+```
+
+#### 新規スライド作成
+
+```bash
+# make newの代わり
+npm run new
+```
+
+または、手動でテンプレートをコピー：
+
+```bash
+# Gradientテーマの場合
+cp templates/gradient/template.md slides/my-slide.md
+```
+
+#### ビルド
+
+**PDF生成:**
+
+```bash
+# make pdfの代わり
+mkdir -p dist/pdf
+npx marp --pdf --allow-local-files slides/*.md -o dist/pdf/
+```
+
+**PowerPoint生成:**
+
+```bash
+# make pptxの代わり
+mkdir -p dist/pptx
+npx marp --pptx --allow-local-files slides/*.md -o dist/pptx/
+```
+
+**HTML生成:**
+
+```bash
+# make htmlの代わり
+mkdir -p dist/html
+npx marp --html --allow-local-files slides/*.md -o dist/html/
+```
+
+**すべての形式を生成:**
+
+```bash
+# make buildの代わり
+mkdir -p dist/pdf dist/pptx dist/html
+npx marp --pdf --allow-local-files slides/*.md -o dist/pdf/
+npx marp --pptx --allow-local-files slides/*.md -o dist/pptx/
+npx marp --html --allow-local-files slides/*.md -o dist/html/
+```
+
+**単一ファイルのビルド:**
+
+```bash
+# make build-one FILE=slides/example.mdの代わり
+filename="slides/example.md"
+basename=$(basename "$filename" .md)
+mkdir -p dist/pdf dist/pptx dist/html
+npx marp --pdf --allow-local-files "$filename" -o "dist/pdf/$basename.pdf"
+npx marp --pptx --allow-local-files "$filename" -o "dist/pptx/$basename.pptx"
+npx marp --html --allow-local-files "$filename" -o "dist/html/$basename.html"
+```
+
+#### クリーンアップ
+
+```bash
+# make cleanの代わり
+rm -rf dist/pdf/* dist/pptx/* dist/html/*
+```
+
+**注意:**
+- 手動コマンドは複雑で入力ミスしやすいため、できるだけ `make` のインストールを推奨します
+- カスタムテーマを使う場合、Marp CLI が自動で `.marprc.yml` を読み込むため、追加オプションは不要です
 
 ### ビルドが非常に遅い
 
