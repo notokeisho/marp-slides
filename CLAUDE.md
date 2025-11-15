@@ -1,176 +1,373 @@
-# CLAUDE.md
+# スライド作成ガイド - Claude Code
 
-このファイルは、このリポジトリで作業する際にClaude Code (claude.ai/code) にガイダンスを提供します。
+このファイルは、Claude Code (claude.ai/code) を使用してスライドを作成する際のガイドです。
 
-## プロジェクト概要
+⚠️ **重要: このドキュメントはスライド作成専用です**
+- システム開発やテーマ追加は行わないでください
+- `make` コマンドのみを使用してください
+- ファイルやディレクトリの直接編集は避けてください
 
-チーム管理されたMarp（Markdown Presentation Ecosystem）スライドリポジトリです。MarkdownファイルはMarp CLIを使用してPDF、PowerPoint、HTMLプレゼンテーションに変換されます。
+## 基本方針
 
-## アーキテクチャ
+### 使用できるコマンド
 
-### ディレクトリ構造の設計思想
+✅ **使用可能なコマンド:**
+- `make new` - 新規スライド作成
+- `make build` - 全形式ビルド
+- `make pdf` - PDFのみビルド
+- `make pptx` - PowerPointのみビルド
+- `make html` - HTMLのみビルド
+- `make build-one FILE=slides/xxx.md` - 特定のファイルのみビルド
+- `make clean` - 生成物の削除
 
-```
-slides/                     # スライドソース（Git管理対象）
-  ├─ example.md
-  └─ presentation.md
-templates/                  # テーマ別テンプレート（Git管理対象）
-  ├─ gradient/
-  │  └─ template.md
-  └─ darkmode/
-     └─ template.md
-themes/[theme-name]/        # テーマCSSファイル（Git管理対象）
-  ├─ gradient/
-  └─ darkmode/
-assets/                     # 共有画像・リソース（Git管理対象）
-dist/                       # 生成物（Git管理対象外）
-```
+❌ **使用禁止:**
+- npmコマンドの直接実行
+- ファイルやディレクトリの直接作成・編集・削除
+- テーマファイル (`themes/`) の変更
+- 設定ファイル (`.vscode/`, `.marprc.yml`, `Makefile`) の変更
+- スクリプトファイル (`scripts/`) の変更
 
-**重要な設計原則**: スライドは`slides/`ディレクトリ直下に配置されます。
+### トラブル時の対応
 
-### テーマシステム
+`make` コマンドが使えない場合のみ、`docs/troubleshooting.md` に記載されている手動コマンドを使用してください。
 
-3つのテーマが利用可能です：
+## スライド作成のワークフロー
 
-1. **default** (Marp標準テーマ)
-   - Marpのデフォルトテーマ
-   - シンプルで汎用的なデザイン
-   - 使用方法: Front Matterで`theme: default`
-
-2. **gradient** (`themes/gradient/gradient.css`)
-   - グラデーションオーバーレイ付き明るい背景
-   - 紫色のカラースキーム (#842174)
-   - 使用方法: Front Matterで`theme: gradient`
-
-3. **darkmode** (`themes/darkmode/darkmode.css`)
-   - 放射状グラデーション付きダーク背景
-   - 青色のカラースキーム (#a5c9ff)
-   - Marpの"gaia"テーマをベースにしている
-   - 使用方法: Front Matterで`theme: darkmode`
-
-カスタムテーマ（gradient, darkmode）の共通点：
-- Google Fonts（Inter、Noto Sans JP）をインポート
-- `.vscode/settings.json`と`.marprc.yml`に登録されている
-- CSSファイルの先頭で`@theme [名前]`を使用する必要がある
-
-### Marp設定
-
-- **VS Code統合**:
-  - `.vscode/extensions.json`: 推奨拡張機能リスト（Marp for VS Code）
-  - `.vscode/settings.json`: Marp for VS Code拡張機能用にテーマパスを登録
-- **CLI設定**: `.marprc.yml`でコマンドライン用にテーマを登録
-- **ビルドオプション**: すべてのビルドで`--allow-local-files`フラグを使用してローカル画像参照を許可
-
-### 必須拡張機能
-
-**Marp for VS Code** (`marp-team.marp-vscode`)
-- リポジトリを開くと自動的にインストールを提案
-- `.vscode/extensions.json`に定義済み
-- カスタムテーマ（gradient, darkmode）を使用するために必須
-- 拡張機能なしでは`.vscode/settings.json`のテーマ設定が機能しない
-
-## よく使うコマンド
-
-### セットアップ
+### ステップ1: 新規スライドの作成
 
 ```bash
-make install              # npmパッケージのインストール (Marp CLI, inquirer)
-npm install               # 上記と同じ
+make new
 ```
 
-**インストールされるもの:**
-- **@marp-team/marp-cli**: Markdownからスライドを生成
-- **inquirer**: `make new`でのインタラクティブUI（Next.jsライクな矢印キー操作）
+1. **ファイル名を入力** (拡張子なし)
+   - 例: `my-presentation`, `team-meeting`
+2. **テーマを選択** (矢印キーで選択、Enterで確定)
+   - `default` - シンプルな標準テーマ
+   - `gradient` - 紫のグラデーションテーマ
+   - `darkmode` - ダークモードテーマ
+3. `slides/[filename].md` が自動生成されます
 
-### スライドのビルド
+### ステップ2: スライドの編集
 
-```bash
-make install              # Marp CLIをグローバルインストール
-make new                  # 新規スライド作成（インタラクティブ）
-make build                # すべてのスライドを全形式でビルド（PDF、PPTX、HTML）
-make pdf                  # PDFのみビルド
-make pptx                 # PowerPointのみビルド
-make html                 # HTMLのみビルド
-make build-one FILE=slides/presentation.md  # 単一ファイルをビルド（全形式）
-make clean                # dist/内のすべての生成ファイルを削除
+生成されたMarkdownファイルを開き、内容を編集します。
+
+#### Front Matter（ヘッダー設定）
+
+```yaml
+---
+marp: true
+theme: gradient  # 使用するテーマ
+paginate: true   # ページ番号表示
+header: "ヘッダーテキスト"
+footer: "フッターテキスト"
+---
 ```
 
-### ビルド動作
+#### スライドの区切り
 
-- `slides/*.md`を反復処理
-- 出力ファイル名: `[filename].[拡張子]`
-- 例: `slides/demo.md` → `dist/pdf/demo.pdf`
+```markdown
+---
+```
 
-## 新しいスライドの作成
+横線3つ (`---`) で次のスライドに移ります。
 
-### インタラクティブ作成（推奨）
+#### スライドクラスの使用
 
-1. `make new` を実行
-2. ファイル名を入力（拡張子なし）
-3. テーマを矢印キーで選択（Next.jsライクなUI）
-4. `slides/[filename].md` が自動生成される
+```markdown
+<!-- _class: title -->
 
-**UIの特徴:**
-- inquirer（Node.js）を使用したNext.jsスタイルのインタラクティブUI
-- 矢印キーでテーマ選択、Enterで確定
-- ファイル名の重複チェックと検証
+# タイトルスライド
+```
 
-### 手動作成
+**利用可能なクラス:**
+- `title` - タイトルスライド（中央配置）
+- `gradient` - グラデーション背景スライド（gradientテーマのみ）
+- `end` - エンドスライド
 
-1. テンプレートをコピー:
-   - Defaultテーマ: `cp templates/default/template.md slides/presentation.md`
-   - Gradientテーマ: `cp templates/gradient/template.md slides/presentation.md`
-   - Darkmodeテーマ: `cp templates/darkmode/template.md slides/presentation.md`
-2. 内容を編集してビルド: `make build-one FILE=slides/presentation.md`
+#### 画像の挿入
 
-## Marp固有のパターン
+```markdown
+# サイズ指定
+![width:500px](../../assets/image.png)
+![height:300px](../../assets/image.png)
 
-### スライドクラス
+# 背景画像
+![bg](../../assets/background.png)
+```
 
-- `<!-- _class: title -->` - 全画面タイトルスライド
-- `<!-- _class: gradient -->` - 全面グラデーション背景スライド（gradientテーマのみ）
-- `<!-- _class: end -->` - エンドスライド
-- クラス指定なし = デフォルトのコンテンツスライド
+**注意:** 画像パスはMarkdownファイルからの相対パスで指定します。
 
-### 画像の扱い
+#### 2カラムレイアウト
 
-- Markdownファイルからの相対パスを使用: `../../assets/image.png`
-- サイズ制御: `![width:500px](path)` または `![height:300px](path)`
-- 背景: `![bg](path)`
-
-### 2カラムレイアウト
-
-```html
+```markdown
 <div class="columns">
 <div>
-左側のコンテンツ
+
+### 左カラム
+
+- ポイント1
+- ポイント2
+
 </div>
 <div>
-右側のコンテンツ
+
+### 右カラム
+
+- ポイント3
+- ポイント4
+
 </div>
 </div>
 ```
 
-## 新しいテーマの追加
+#### コードブロック
 
-1. ディレクトリを作成: `mkdir themes/new-theme`
-2. CSSを作成: `themes/new-theme/new-theme.css`に`@theme new-theme`ディレクティブを含める
-3. 両方に登録:
-   - `.vscode/settings.json`: `"./themes/new-theme/new-theme.css"`を追加
-   - `.marprc.yml`: `- ./themes/new-theme/new-theme.css`を追加
-4. テンプレートを作成: `templates/new-theme/template.md`に対応するテンプレートを作成することを推奨
+````markdown
+```python
+def hello_world():
+    print("Hello, Marp!")
+    return True
+```
+````
 
-## Gitワークフロー
+#### 表
 
-**コミット対象**: `slides/`内のMarkdownファイル、`themes/`内のテーマファイル、templates、assets
-**無視対象**: `dist/`内のすべて、`node_modules/`、OSファイル
+```markdown
+| 項目 | 説明 | 備考 |
+| ---- | ---- | ---- |
+| A    | データA | 重要 |
+| B    | データB | 参考 |
+| C    | データC | 補足 |
+```
 
-ブランチ命名規則: `feature/presentation-name`
+### ステップ3: ビルド
 
-## 重要な注意事項
+#### すべての形式でビルド
 
-- MarpはYAML Front Matterの厳密なフォーマットを要求（前後に3つのダッシュ）
-- スライドは`---`で区切られる（独立した行である必要がある）
-- Front Matterのテーマ名はCSSの`@theme`ディレクティブと完全に一致する必要がある
-- ローカル画像参照には`--allow-local-files`フラグが必要
-- 出力ファイル名のパターンはMakefileのロジックを変更しない限り変更不可
+```bash
+make build
+```
+
+#### 特定の形式のみビルド
+
+```bash
+make pdf   # PDFのみ
+make pptx  # PowerPointのみ
+make html  # HTMLのみ
+```
+
+#### 特定のファイルのみビルド
+
+```bash
+make build-one FILE=slides/my-presentation.md
+```
+
+**出力先:**
+- PDF: `dist/pdf/[filename].pdf`
+- PPTX: `dist/pptx/[filename].pptx`
+- HTML: `dist/html/[filename].html`
+
+### ステップ4: 確認
+
+生成されたファイルを確認します。
+
+```bash
+# macOSの場合
+open dist/pdf/my-presentation.pdf
+open dist/pptx/my-presentation.pptx
+open dist/html/my-presentation.html
+```
+
+## Claude Codeとの対話例
+
+### スライド作成のリクエスト
+
+**ユーザー:**
+```
+新しいプレゼンテーションを作成したい。タイトルは「プロジェクト進捗報告」で、以下の内容を含めてください：
+1. タイトルスライド
+2. 目次
+3. 進捗状況（3つのセクション）
+4. 今後の予定
+5. まとめ
+
+テーマはgradientでお願いします。
+```
+
+**Claude Codeの対応:**
+1. `make new` を実行してファイル作成
+2. テーマ選択でgradientを選択
+3. 指定された内容でMarkdownを編集
+4. `make build` を実行してPDF/PPTX/HTML生成
+5. 生成されたファイルのパスを報告
+
+### スライド内容の修正
+
+**ユーザー:**
+```
+slides/project-report.md の進捗状況セクションに、各項目の進捗率を追加してください。
+```
+
+**Claude Codeの対応:**
+1. `slides/project-report.md` を読み取り
+2. 進捗状況セクションを特定
+3. 各項目に進捗率を追加
+4. 変更内容を報告
+
+### 画像の追加
+
+**ユーザー:**
+```
+スライド3に画像を追加したい。assets/chart.png を横幅600pxで挿入してください。
+```
+
+**Claude Codeの対応:**
+1. スライド3を特定
+2. 正しい相対パスで画像を挿入: `![width:600px](../../assets/chart.png)`
+3. 変更内容を報告
+
+## 利用可能なテーマ
+
+### default
+
+Marp標準テーマ。シンプルで汎用的。
+
+**用途:**
+- ビジネスプレゼンテーション
+- シンプルなデザインが必要な場合
+
+### gradient
+
+華やかなグラデーションテーマ。
+
+**特徴:**
+- 紫色のグラデーション (#667eea → #764ba2)
+- 明るく華やかなデザイン
+
+**用途:**
+- クリエイティブなプレゼンテーション
+- イベントやセミナー
+
+### darkmode
+
+モダンなダークモードテーマ。
+
+**特徴:**
+- ダーク背景と青いアクセント (#a5c9ff)
+- 目に優しいデザイン
+
+**用途:**
+- 技術系プレゼンテーション
+- 暗い会場でのプレゼンテーション
+
+詳細は `docs/themes.md` を参照してください。
+
+## よくある質問
+
+### Q: テーマを途中で変更したい
+
+A: Markdownファイルの Front Matter で `theme:` を変更してください。
+
+```yaml
+---
+theme: gradient  # → theme: darkmode に変更
+---
+```
+
+### Q: ページ番号を非表示にしたい
+
+A: Front Matter で `paginate: false` に設定してください。
+
+```yaml
+---
+paginate: false
+---
+```
+
+### Q: ヘッダーやフッターを変更したい
+
+A: Front Matter で `header:` と `footer:` を編集してください。
+
+```yaml
+---
+header: "新しいヘッダー"
+footer: "新しいフッター"
+---
+```
+
+### Q: スライドの順序を入れ替えたい
+
+A: Markdown内でスライドの順序を直接入れ替えてください。`---` で区切られた各セクションを移動します。
+
+### Q: ビルドエラーが発生した
+
+A: 以下を確認してください：
+1. Front Matterの形式が正しいか（前後に `---` があるか）
+2. 画像パスが正しいか
+3. `docs/troubleshooting.md` を参照
+
+### Q: makeコマンドが使えない
+
+A: `docs/troubleshooting.md` の「makeコマンドが使えない」セクションを参照してください。手動コマンドでの代替方法が記載されています。
+
+## 制約事項
+
+### システムファイルの変更禁止
+
+以下のファイル・ディレクトリは**絶対に変更しないでください**：
+
+- `themes/` - テーマファイル
+- `templates/` - テンプレートファイル
+- `scripts/` - スクリプトファイル
+- `.vscode/` - VS Code設定
+- `.marprc.yml` - Marp CLI設定
+- `Makefile` - ビルド設定
+- `package.json` - 依存関係設定
+
+これらを変更すると、システム全体が壊れる可能性があります。
+
+### スライド作成のみに専念
+
+このシステムは以下の用途のみを想定しています：
+
+✅ **可能な操作:**
+- 新規スライドの作成 (`make new`)
+- スライド内容の編集 (`slides/` 内のMarkdownファイル)
+- スライドのビルド (`make build` 等)
+- アセットの追加 (`assets/` 内の画像ファイル)
+
+❌ **禁止されている操作:**
+- 新しいテーマの追加
+- 既存テーマの変更
+- スクリプトやMakefileの変更
+- 設定ファイルの変更
+- システムの拡張や改造
+
+## トラブルシューティング
+
+問題が発生した場合は、以下のドキュメントを参照してください：
+
+- **[トラブルシューティングガイド](docs/troubleshooting.md)** - よくある問題と解決方法
+- **[使い方ガイド](docs/usage.md)** - 詳細な使い方
+- **[テーマガイド](docs/themes.md)** - テーマの詳細
+
+## 参考資料
+
+- **[README.md](README.md)** - プロジェクト概要
+- **[セットアップガイド](docs/setup.md)** - 初期セットアップ手順
+- **[使い方ガイド](docs/usage.md)** - スライド作成と編集
+- **[テーマガイド](docs/themes.md)** - テーマの詳細
+- **[アーキテクチャ](docs/architecture.md)** - プロジェクト構造
+- **[トラブルシューティング](docs/troubleshooting.md)** - 問題解決
+
+## Claude Codeの動作原則
+
+Claude Codeがスライド作成をサポートする際の原則：
+
+1. **makeコマンドのみを使用** - 直接のnpmコマンドやファイル操作は行わない
+2. **スライドファイルのみを編集** - `slides/` 内のMarkdownファイルと `assets/` 内の画像のみ
+3. **システムファイルは変更しない** - テーマ、スクリプト、設定ファイルには触れない
+4. **ユーザーの意図を確認** - 不明な点は質問してから実行
+5. **エラー時は適切なドキュメントを案内** - `docs/troubleshooting.md` を参照するよう促す
+
+このガイドラインに従うことで、安全にスライドを作成できます。
