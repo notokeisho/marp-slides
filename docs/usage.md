@@ -19,15 +19,11 @@ make new
 
 ### 手動作成
 
+`make new`の使用を推奨しますが、手動でテンプレートをコピーすることもできます：
+
 ```bash
-# Defaultテーマを使う場合
-cp templates/default/template.md slides/my-presentation.md
-
-# Gradientテーマを使う場合
+# 例：Gradientテーマを使う場合
 cp templates/gradient/template.md slides/my-presentation.md
-
-# Darkmodeテーマを使う場合
-cp templates/darkmode/template.md slides/my-presentation.md
 ```
 
 ## スライドの編集
