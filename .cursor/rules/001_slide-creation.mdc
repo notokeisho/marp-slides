@@ -1,0 +1,379 @@
+---
+title: Slide Creation Rules
+description: Guidelines for creating Marp slides safely
+tags: [slides, marp, presentation]
+---
+
+# Slide Creation Guide - Cursor
+
+This file provides guidance for Cursor when creating slides in this repository.
+
+⚠️ **Important: This document is for slide creation only**
+- Do NOT modify system files or add themes
+- Use ONLY `make` commands
+- Avoid direct file or directory manipulation
+
+## Core Principles
+
+### Allowed Commands
+
+✅ **Allowed Commands:**
+- `make new` - Create new slide
+- `make build` - Build all formats
+- `make pdf` - Build PDF only
+- `make pptx` - Build PowerPoint only
+- `make html` - Build HTML only
+- `make build-one FILE=slides/xxx.md` - Build specific file
+- `make clean` - Clean generated files
+
+❌ **Forbidden:**
+- Direct npm commands
+- Direct file/directory creation, editing, or deletion
+- Modifying theme files (`themes/`)
+- Modifying config files (`.vscode/`, `.marprc.yml`, `Makefile`)
+- Modifying script files (`scripts/`)
+
+### Troubleshooting
+
+Only when `make` commands don't work, refer to manual commands in `docs/troubleshooting.md`.
+
+## Slide Creation Workflow
+
+### Step 1: Create New Slide
+
+```bash
+make new
+```
+
+1. **Enter filename** (without extension)
+   - Example: `my-presentation`, `team-meeting`
+2. **Select theme** (use arrow keys, Enter to confirm)
+   - `default` - Simple standard theme
+   - `gradient` - Purple gradient theme
+   - `darkmode` - Dark mode theme
+3. File `slides/[filename].md` will be auto-generated
+
+### Step 2: Edit Slide Content
+
+Open the generated Markdown file and edit the content.
+
+#### Front Matter (Header Configuration)
+
+```yaml
+---
+marp: true
+theme: gradient  # Theme to use
+paginate: true   # Show page numbers
+header: "Header Text"
+footer: "Footer Text"
+---
+```
+
+#### Slide Separator
+
+```markdown
+---
+```
+
+Three horizontal lines (`---`) start a new slide.
+
+#### Slide Classes
+
+```markdown
+<!-- _class: title -->
+
+# Title Slide
+```
+
+**Available Classes:**
+- `title` - Title slide (centered)
+- `gradient` - Gradient background slide (gradient theme only)
+- `end` - End slide
+
+#### Images
+
+```markdown
+# Size specification
+![width:500px](../../assets/image.png)
+![height:300px](../../assets/image.png)
+
+# Background image
+![bg](../../assets/background.png)
+```
+
+**Note:** Image paths are relative to the Markdown file.
+
+#### Two-Column Layout
+
+```markdown
+<div class="columns">
+<div>
+
+### Left Column
+
+- Point 1
+- Point 2
+
+</div>
+<div>
+
+### Right Column
+
+- Point 3
+- Point 4
+
+</div>
+</div>
+```
+
+#### Code Blocks
+
+````markdown
+```python
+def hello_world():
+    print("Hello, Marp!")
+    return True
+```
+````
+
+#### Tables
+
+```markdown
+| Item | Description | Note |
+| ---- | ----------- | ---- |
+| A    | Data A      | Important |
+| B    | Data B      | Reference |
+| C    | Data C      | Note |
+```
+
+### Step 3: Build
+
+#### Build All Formats
+
+```bash
+make build
+```
+
+#### Build Specific Format
+
+```bash
+make pdf   # PDF only
+make pptx  # PowerPoint only
+make html  # HTML only
+```
+
+#### Build Specific File
+
+```bash
+make build-one FILE=slides/my-presentation.md
+```
+
+**Output Locations:**
+- PDF: `dist/pdf/[filename].pdf`
+- PPTX: `dist/pptx/[filename].pptx`
+- HTML: `dist/html/[filename].html`
+
+### Step 4: Verify
+
+Check the generated files.
+
+```bash
+# On macOS
+open dist/pdf/my-presentation.pdf
+open dist/pptx/my-presentation.pptx
+open dist/html/my-presentation.html
+```
+
+## Interaction Examples with Cursor
+
+### Slide Creation Request
+
+**User:**
+```
+Create a new presentation titled "Project Progress Report" with the following content:
+1. Title slide
+2. Table of contents
+3. Progress status (3 sections)
+4. Future plans
+5. Summary
+
+Use the gradient theme.
+```
+
+**Cursor Actions:**
+1. Execute `make new` to create file
+2. Select gradient theme
+3. Edit Markdown with specified content
+4. Execute `make build` to generate PDF/PPTX/HTML
+5. Report generated file paths
+
+### Modify Slide Content
+
+**User:**
+```
+Add progress percentages to each item in the progress status section of slides/project-report.md.
+```
+
+**Cursor Actions:**
+1. Read `slides/project-report.md`
+2. Identify progress status section
+3. Add progress percentages to each item
+4. Report changes made
+
+### Add Image
+
+**User:**
+```
+Add an image to slide 3. Insert assets/chart.png with 600px width.
+```
+
+**Cursor Actions:**
+1. Identify slide 3
+2. Insert image with correct relative path: `![width:600px](../../assets/chart.png)`
+3. Report changes made
+
+## Available Themes
+
+### default
+
+Standard Marp theme. Simple and universal.
+
+**Use Cases:**
+- Business presentations
+- When simple design is needed
+
+### gradient
+
+Vibrant gradient theme.
+
+**Features:**
+- Purple gradient (#667eea → #764ba2)
+- Bright and vibrant design
+
+**Use Cases:**
+- Creative presentations
+- Events and seminars
+
+### darkmode
+
+Modern dark mode theme.
+
+**Features:**
+- Dark background with blue accents (#a5c9ff)
+- Eye-friendly design
+
+**Use Cases:**
+- Technical presentations
+- Presentations in dark venues
+
+See `docs/themes.md` for details.
+
+## Frequently Asked Questions
+
+### Q: Change theme mid-project
+
+A: Modify `theme:` in the Front Matter of the Markdown file.
+
+```yaml
+---
+theme: gradient  # → Change to theme: darkmode
+---
+```
+
+### Q: Hide page numbers
+
+A: Set `paginate: false` in Front Matter.
+
+```yaml
+---
+paginate: false
+---
+```
+
+### Q: Change header/footer
+
+A: Edit `header:` and `footer:` in Front Matter.
+
+```yaml
+---
+header: "New Header"
+footer: "New Footer"
+---
+```
+
+### Q: Reorder slides
+
+A: Directly reorder slide sections in Markdown. Move sections separated by `---`.
+
+### Q: Build error occurred
+
+A: Check the following:
+1. Front Matter format is correct (has `---` before and after)
+2. Image paths are correct
+3. Refer to `docs/troubleshooting.md`
+
+### Q: make command doesn't work
+
+A: Refer to "make command doesn't work" section in `docs/troubleshooting.md`. Manual command alternatives are documented.
+
+## Constraints
+
+### System File Modification Forbidden
+
+**NEVER modify these files/directories:**
+
+- `themes/` - Theme files
+- `templates/` - Template files
+- `scripts/` - Script files
+- `.vscode/` - VS Code configuration
+- `.marprc.yml` - Marp CLI configuration
+- `Makefile` - Build configuration
+- `package.json` - Dependencies configuration
+
+Modifying these can break the entire system.
+
+### Focus on Slide Creation Only
+
+This system is designed for the following purposes only:
+
+✅ **Allowed Operations:**
+- Creating new slides (`make new`)
+- Editing slide content (Markdown files in `slides/`)
+- Building slides (`make build`, etc.)
+- Adding assets (image files in `assets/`)
+
+❌ **Forbidden Operations:**
+- Adding new themes
+- Modifying existing themes
+- Modifying scripts or Makefile
+- Modifying configuration files
+- Extending or modifying the system
+
+## Troubleshooting
+
+If problems occur, refer to these documents:
+
+- **[Troubleshooting Guide](docs/troubleshooting.md)** - Common problems and solutions
+- **[Usage Guide](docs/usage.md)** - Detailed usage
+- **[Theme Guide](docs/themes.md)** - Theme details
+
+## Reference Materials
+
+- **[README.md](README.md)** - Project overview
+- **[Setup Guide](docs/setup.md)** - Initial setup
+- **[Usage Guide](docs/usage.md)** - Slide creation and editing
+- **[Theme Guide](docs/themes.md)** - Theme details
+- **[Architecture](docs/architecture.md)** - Project structure
+- **[Troubleshooting](docs/troubleshooting.md)** - Problem solving
+
+## Cursor Operating Principles
+
+Principles for Cursor when supporting slide creation:
+
+1. **Use make commands only** - No direct npm commands or file operations
+2. **Edit slide files only** - Only Markdown files in `slides/` and images in `assets/`
+3. **Don't modify system files** - Don't touch themes, scripts, or configuration files
+4. **Confirm user intent** - Ask questions before execution when unclear
+5. **Guide to appropriate docs on error** - Direct users to `docs/troubleshooting.md`
+
+Following these guidelines ensures safe slide creation.
