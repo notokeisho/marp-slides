@@ -20,11 +20,7 @@ cd marp-slides
 ### 2. 依存パッケージのインストール
 
 ```bash
-# Makefileを使う方法（推奨）
 make install
-
-# または直接npmコマンド
-npm install
 ```
 
 **インストールされるパッケージ:**
@@ -55,12 +51,11 @@ ext install marp-team.marp-vscode
 ### 4. セットアップの確認
 
 ```bash
-# Marp CLIが正しくインストールされたか確認
-npx marp --version
-
 # 新規スライド作成をテスト
 make new
 ```
+
+正常に動作すれば、セットアップ完了です。
 
 ## トラブルシューティング
 
