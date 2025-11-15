@@ -17,7 +17,7 @@ Markdown でスライドを書き、PDF/PowerPoint/HTML に自動変換します
 
 ```bash
 # リポジトリをクローン
-git clone <repository-url>
+git clone git@github.com:notokeisho/marp-slides.gits
 cd marp-slides
 
 # 依存パッケージをインストール
