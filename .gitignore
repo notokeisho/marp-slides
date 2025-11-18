@@ -25,3 +25,6 @@ Thumbs.db
 # 一時ファイル
 *.tmp
 *.log
+
+# Claude Code
+.claude/plan
