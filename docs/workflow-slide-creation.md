@@ -1,6 +1,6 @@
 # スライド作成ワークフロー
 
-このドキュメントは、AIエージェントが「スライド作成して」とリクエストされた時に従うワークフローです。
+このドキュメントは、AI エージェントが「スライド作成して」とリクエストされた時に従うワークフローです。
 
 ## トリガーとなるユーザーリクエスト
 
@@ -24,9 +24,9 @@
    例：project-report, team-meeting, product-launch
 
 2. テーマ（番号または名前）
-   - gradient - 紫のグラデーション（華やかなデザイン）
-   - default - シンプルな標準テーマ（ビジネス向け）
-   - darkmode - ダークモード（技術系向け）
+   a. gradient - 紫のグラデーション（華やかなデザイン）
+   b. default - シンプルな標準テーマ（ビジネス向け）
+   c. darkmode - ダークモード（技術系向け）
 ```
 
 **ユーザーの回答を待つ**
@@ -42,6 +42,7 @@ make new NAME=project-report THEME=gradient
 ```
 
 作成完了を報告してから次のステップへ：
+
 ```
 ✅ スライドファイルを作成しました: workspace/slides/[ファイル名].md
 
@@ -76,30 +77,34 @@ make new NAME=project-report THEME=gradient
 ```
 
 **画像が必要な場合：**
-1. ユーザーから画像URL or ファイルパスを受け取る
+
+1. ユーザーから画像 URL or ファイルパスを受け取る
 2. `workspace/img/` にダウンロード/コピー
 3. 「この画像でいいですか？」と確認
-4. OKなら次のステップへ
+4. OK なら次のステップへ
 
 **画像不要の場合：** 次のステップへ進む
 
 ### ステップ 4: スライド内容の編集
 
-ステップ1で作成した `workspace/slides/[ファイル名].md` を開き、ユーザーが指定した内容に基づいてMarkdownを編集します。
+ステップ 1 で作成した `workspace/slides/[ファイル名].md` を開き、ユーザーが指定した内容に基づいて Markdown を編集します。
 
 **編集のポイント：**
+
 - タイトルスライドには `<!-- _class: title -->` を使用
 - スライドは `---` で区切る
 - 画像は `![width:500px](../img/image.png)` 形式
 - 箇条書き、表、コードブロックなど適切に活用
 
 **画像を含める場合：**
+
 ```markdown
 <!-- 出典: https://example.com/page -->
+
 ![説明文](../img/downloaded-image.png)
 ```
 
-**Markdown構文の参考：** [使い方ガイド](usage.md)
+**Markdown 構文の参考：** [使い方ガイド](usage.md)
 
 ### ステップ 5: プレビュー案内
 
@@ -139,7 +144,7 @@ make preview
 
 **ユーザーの回答を待つ**
 
-- 修正あり → Markdownを編集 → 再度「修正箇所はありますか？」
+- 修正あり → Markdown を編集 → 再度「修正箇所はありますか？」
 - 修正なし（「なし」「OK」「完成」等）→ 次のステップへ
 
 ### ステップ 7: ビルド確認
@@ -158,13 +163,13 @@ make preview
 
 **ユーザーの回答を待つ**
 
-| 回答 | アクション |
-|-----|-----------|
+| 回答       | アクション                                             |
+| ---------- | ------------------------------------------------------ |
 | 1 / 全形式 | `make build-one FILE=workspace/slides/[ファイル名].md` |
-| 2 / PDF | `make pdf-one FILE=workspace/slides/[ファイル名].md` |
-| 3 / PPTX | `make pptx-one FILE=workspace/slides/[ファイル名].md` |
-| 4 / HTML | `make html-one FILE=workspace/slides/[ファイル名].md` |
-| 5 / いいえ | ビルドせず完了報告へ |
+| 2 / PDF    | `make pdf-one FILE=workspace/slides/[ファイル名].md`   |
+| 3 / PPTX   | `make pptx-one FILE=workspace/slides/[ファイル名].md`  |
+| 4 / HTML   | `make html-one FILE=workspace/slides/[ファイル名].md`  |
+| 5 / いいえ | ビルドせず完了報告へ                                   |
 
 ### ステップ 8: 完了報告
 
@@ -209,33 +214,37 @@ make build-one FILE=workspace/slides/[ファイル名].md
 1. 画像ソースを確認（URL or ユーザー提供ファイル）
 2. `workspace/img/` にダウンロード/コピー
 3. 「この画像でいいですか？」と確認
-4. Markdownに画像を挿入：
+4. Markdown に画像を挿入：
    ```markdown
    <!-- 出典: https://example.com/page -->
+
    ![説明文](../img/画像名.png)
    ```
 5. 「ビルドしますか？」と確認（自動ビルドしない）
 
 **禁止事項：**
-- AI画像生成（DALL-E等）は使用しない
-- ストック画像の自動取得（Unsplash等）は行わない
+
+- AI 画像生成（DALL-E 等）は使用しない
+- ストック画像の自動取得（Unsplash 等）は行わない
 - ユーザーの指示なしに画像を追加しない
 
 **許可される図形生成：**
-- 基本図形（四角、三角、丸など）
-- フローチャート（Mermaid → PNG変換が必要）
-- ダイアグラム（Mermaid → PNG変換が必要）
 
-**Mermaid図の使い方：**
-1. `workspace/img/diagram.mmd` にMermaid記法で図を作成
+- 基本図形（四角、三角、丸など）
+- フローチャート（Mermaid → PNG 変換が必要）
+- ダイアグラム（Mermaid → PNG 変換が必要）
+
+**Mermaid 図の使い方：**
+
+1. `workspace/img/diagram.mmd` に Mermaid 記法で図を作成
 2. `make mermaid FILE=workspace/img/diagram.mmd` で PNG に変換
 3. スライドに `![](../img/diagram.png)` で挿入
 
-詳細: [Mermaidガイド](mermaid.md)
+詳細: [Mermaid ガイド](mermaid.md)
 
 ### 「テーマを変えて」
 
-1. `workspace/slides/[ファイル名].md` のFront Matterを編集
+1. `workspace/slides/[ファイル名].md` の Front Matter を編集
 2. `theme:` の値を変更（default / gradient / darkmode）
 3. 「ビルドしますか？」と確認（自動ビルドしない）
 
@@ -268,14 +277,14 @@ make build-one FILE=workspace/slides/[ファイル名].md
 
 ## 詳細情報
 
-- [使い方ガイド](usage.md) - Marp記法の詳細
+- [使い方ガイド](usage.md) - Marp 記法の詳細
 - [テーマガイド](themes.md) - テーマの詳細と使い分け
 - [トラブルシューティング](troubleshooting.md) - 問題解決
 
 ## 注意事項
 
 - **必ず質問する**: ファイル名、テーマ、内容は推測せず必ず質問
-- **makeコマンドのみ使用**: npm等の直接コマンドは使わない
+- **make コマンドのみ使用**: npm 等の直接コマンドは使わない
 - **スライドファイルのみ編集**: `workspace/slides/` と `workspace/img/` 以外は編集しない
-- **システムファイル保護**: system/themes/, system/scripts/, Makefile等は絶対に変更しない
+- **システムファイル保護**: system/themes/, system/scripts/, Makefile 等は絶対に変更しない
 - **画像は確認必須**: 画像を追加する前に必ずユーザーに確認する
