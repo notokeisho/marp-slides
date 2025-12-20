@@ -130,7 +130,7 @@ make preview
   ```bash
   make preview FILE=workspace/slides/[ファイル名].md
   ```
-- 「いいえ」「自分でやる」→ 次のステップへ
+- 「いいえ」「自分でやる」「できました」→ 次のステップへ
 
 ### ステップ 6: 修正フェーズ
 
@@ -215,11 +215,13 @@ make build-one FILE=workspace/slides/[ファイル名].md
 2. `workspace/img/` にダウンロード/コピー
 3. 「この画像でいいですか？」と確認
 4. Markdown に画像を挿入：
+
    ```markdown
    <!-- 出典: https://example.com/page -->
 
    ![説明文](../img/画像名.png)
    ```
+
 5. 「ビルドしますか？」と確認（自動ビルドしない）
 
 **禁止事項：**
@@ -237,7 +239,7 @@ make build-one FILE=workspace/slides/[ファイル名].md
 **Mermaid 図の使い方：**
 
 1. `workspace/img/diagram.mmd` に Mermaid 記法で図を作成
-2. `make mermaid FILE=workspace/img/diagram.mmd` で SVG に変換
+2. `make mermaid FILE=workspace/img/diagram.mmd` で PNG に変換
 3. スライドに `![](../img/diagram.svg)` で挿入
 
 詳細: [Mermaid ガイド](mermaid.md)
