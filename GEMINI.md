@@ -3,9 +3,14 @@
 This file provides guidance for Gemini CLI when creating slides in this repository.
 
 ⚠️ **Important: This document is for slide creation only**
+
 - Do NOT modify system files or add themes
 - Use ONLY `make` commands
 - Avoid direct file or directory manipulation
+
+## 重要
+
+- ユーザが Coding Agent を実行前に必ず、`docs/important-key.md`を確認してください。
 
 ## 🤖 User Request Response Flow
 
@@ -54,6 +59,7 @@ Respond to user requests by following the appropriate workflow below.
 ### Allowed Commands
 
 ✅ **Allowed Commands:**
+
 - `make new` - Create new slide
 - `make build` - Build all formats
 - `make pdf` - Build PDF only
@@ -63,6 +69,7 @@ Respond to user requests by following the appropriate workflow below.
 - `make clean` - Clean generated files
 
 ❌ **Forbidden:**
+
 - Direct npm commands
 - Direct file/directory creation, editing, or deletion
 - Modifying theme files (`themes/`)
@@ -98,8 +105,8 @@ Open the generated Markdown file and edit the content.
 ```yaml
 ---
 marp: true
-theme: gradient  # Theme to use
-paginate: true   # Show page numbers
+theme: gradient # Theme to use
+paginate: true # Show page numbers
 header: "Header Text"
 footer: "Footer Text"
 ---
@@ -122,6 +129,7 @@ Three horizontal lines (`---`) start a new slide.
 ```
 
 **Available Classes:**
+
 - `title` - Title slide (centered)
 - `gradient` - Gradient background slide (gradient theme only)
 - `end` - End slide
@@ -130,10 +138,12 @@ Three horizontal lines (`---`) start a new slide.
 
 ```markdown
 # Size specification
+
 ![width:500px](../../assets/image.png)
 ![height:300px](../../assets/image.png)
 
 # Background image
+
 ![bg](../../assets/background.png)
 ```
 
@@ -175,11 +185,11 @@ def hello_world():
 #### Tables
 
 ```markdown
-| Item | Description | Note |
-| ---- | ----------- | ---- |
+| Item | Description | Note      |
+| ---- | ----------- | --------- |
 | A    | Data A      | Important |
 | B    | Data B      | Reference |
-| C    | Data C      | Note |
+| C    | Data C      | Note      |
 ```
 
 ### Step 3: Build
@@ -205,6 +215,7 @@ make build-one FILE=slides/my-presentation.md
 ```
 
 **Output Locations:**
+
 - PDF: `dist/pdf/[filename].pdf`
 - PPTX: `dist/pptx/[filename].pptx`
 - HTML: `dist/html/[filename].html`
@@ -225,6 +236,7 @@ open dist/html/my-presentation.html
 ### Slide Creation Request
 
 **User:**
+
 ```
 Create a new presentation titled "Project Progress Report" with the following content:
 1. Title slide
@@ -237,6 +249,7 @@ Use the gradient theme.
 ```
 
 **Gemini CLI Actions:**
+
 1. Execute `make new` to create file
 2. Select gradient theme
 3. Edit Markdown with specified content
@@ -246,11 +259,13 @@ Use the gradient theme.
 ### Modify Slide Content
 
 **User:**
+
 ```
 Add progress percentages to each item in the progress status section of slides/project-report.md.
 ```
 
 **Gemini CLI Actions:**
+
 1. Read `slides/project-report.md`
 2. Identify progress status section
 3. Add progress percentages to each item
@@ -259,11 +274,13 @@ Add progress percentages to each item in the progress status section of slides/p
 ### Add Image
 
 **User:**
+
 ```
 Add an image to slide 3. Insert assets/chart.png with 600px width.
 ```
 
 **Gemini CLI Actions:**
+
 1. Identify slide 3
 2. Insert image with correct relative path: `![width:600px](../../assets/chart.png)`
 3. Report changes made
@@ -275,6 +292,7 @@ Add an image to slide 3. Insert assets/chart.png with 600px width.
 Standard Marp theme. Simple and universal.
 
 **Use Cases:**
+
 - Business presentations
 - When simple design is needed
 
@@ -283,10 +301,12 @@ Standard Marp theme. Simple and universal.
 Vibrant gradient theme.
 
 **Features:**
+
 - Purple gradient (#667eea → #764ba2)
 - Bright and vibrant design
 
 **Use Cases:**
+
 - Creative presentations
 - Events and seminars
 
@@ -295,10 +315,12 @@ Vibrant gradient theme.
 Modern dark mode theme.
 
 **Features:**
+
 - Dark background with blue accents (#a5c9ff)
 - Eye-friendly design
 
 **Use Cases:**
+
 - Technical presentations
 - Presentations in dark venues
 
@@ -312,7 +334,7 @@ A: Modify `theme:` in the Front Matter of the Markdown file.
 
 ```yaml
 ---
-theme: gradient  # → Change to theme: darkmode
+theme: gradient # → Change to theme: darkmode
 ---
 ```
 
@@ -344,6 +366,7 @@ A: Directly reorder slide sections in Markdown. Move sections separated by `---`
 ### Q: Build error occurred
 
 A: Check the following:
+
 1. Front Matter format is correct (has `---` before and after)
 2. Image paths are correct
 3. Refer to `docs/troubleshooting.md`
@@ -373,12 +396,14 @@ Modifying these can break the entire system.
 This system is designed for the following purposes only:
 
 ✅ **Allowed Operations:**
+
 - Creating new slides (`make new`)
 - Editing slide content (Markdown files in `slides/`)
 - Building slides (`make build`, etc.)
 - Adding assets (image files in `assets/`)
 
 ❌ **Forbidden Operations:**
+
 - Adding new themes
 - Modifying existing themes
 - Modifying scripts or Makefile

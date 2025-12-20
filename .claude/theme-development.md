@@ -1,17 +1,21 @@
 # テーマ開発ガイド
 
-このガイドでは、Marp Slidesリポジトリに新しいテーマを追加する手順を詳しく説明します。
+このガイドでは、Marp Slides リポジトリに新しいテーマを追加する手順を詳しく説明します。
+
+## 重要
+
+- ユーザが Coding Agent を実行前に必ず、`docs/important-key.md`を確認してください。
 
 ## 前提条件
 
-- Node.js (v18.0.0以上) がインストールされていること
+- Node.js (v18.0.0 以上) がインストールされていること
 - リポジトリがセットアップ済みであること (`make install` 実行済み)
-- Marp for VS Code拡張機能がインストールされていること（推奨）
+- Marp for VS Code 拡張機能がインストールされていること（推奨）
 - CSS の基礎知識があること
 
-## テーマ追加の7ステップ
+## テーマ追加の 7 ステップ
 
-### ステップ1: テーマディレクトリの作成
+### ステップ 1: テーマディレクトリの作成
 
 新しいテーマ用のディレクトリを作成します。
 
@@ -21,11 +25,12 @@ mkdir -p themes/ocean
 ```
 
 **命名規則:**
+
 - 小文字のみ使用
 - ハイフン区切り (例: `ocean-blue`, `corporate-minimal`)
 - テーマの特徴を表す名前
 
-### ステップ2: CSSファイルの作成
+### ステップ 2: CSS ファイルの作成
 
 `themes/[theme-name]/[theme-name].css` を作成します。
 
@@ -35,26 +40,32 @@ touch themes/ocean/ocean.css
 ```
 
 **必須要件:**
-1. ファイルの先頭に `@theme [theme-name]` ディレクティブを記述
-2. ディレクトリ名とCSS内の `@theme` 名を一致させる
-3. Google Fonts等の外部フォントを使用する場合は `@import` を先頭に配置
 
-**最小限のテーマCSS例:**
+1. ファイルの先頭に `@theme [theme-name]` ディレクティブを記述
+2. ディレクトリ名と CSS 内の `@theme` 名を一致させる
+3. Google Fonts 等の外部フォントを使用する場合は `@import` を先頭に配置
+
+**最小限のテーマ CSS 例:**
 
 ```css
 /* ocean.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap");
 
 /* @theme ocean */
 
 section {
-  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  font-family: "Inter", "Noto Sans JP", sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
   padding: 50px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #ffffff;
   font-weight: 700;
 }
@@ -92,10 +103,11 @@ section.title h2 {
 ```
 
 **参考にできる既存テーマ:**
-- `themes/gradient/gradient.css` - グラデーション背景の明るいテーマ
-- `themes/darkmode/darkmode.css` - ダークモードテーマ (Marp gaiaベース)
 
-### ステップ3: VS Code設定への登録
+- `themes/gradient/gradient.css` - グラデーション背景の明るいテーマ
+- `themes/darkmode/darkmode.css` - ダークモードテーマ (Marp gaia ベース)
+
+### ステップ 3: VS Code 設定への登録
 
 `.vscode/settings.json` にテーマパスを追加します。
 
@@ -104,17 +116,18 @@ section.title h2 {
   "markdown.marp.themes": [
     "./themes/gradient/gradient.css",
     "./themes/darkmode/darkmode.css",
-    "./themes/ocean/ocean.css"  // 新しいテーマを追加
+    "./themes/ocean/ocean.css" // 新しいテーマを追加
   ]
 }
 ```
 
 **注意:**
-- パスはプロジェクトルートからの相対パス
-- VS Codeでのリアルタイムプレビューに必要
-- 追加後はVS Codeを再起動することを推奨
 
-### ステップ4: Marp CLI設定への登録
+- パスはプロジェクトルートからの相対パス
+- VS Code でのリアルタイムプレビューに必要
+- 追加後は VS Code を再起動することを推奨
+
+### ステップ 4: Marp CLI 設定への登録
 
 `.marprc.yml` にテーマパスを追加します。
 
@@ -125,14 +138,15 @@ options:
 themeSet:
   - ./themes/gradient/gradient.css
   - ./themes/darkmode/darkmode.css
-  - ./themes/ocean/ocean.css  # 新しいテーマを追加
+  - ./themes/ocean/ocean.css # 新しいテーマを追加
 ```
 
 **注意:**
-- Marp CLIでのビルド (`make build`) に必要
+
+- Marp CLI でのビルド (`make build`) に必要
 - `allowLocalFiles: true` は画像参照のために必須
 
-### ステップ5: テンプレートの作成
+### ステップ 5: テンプレートの作成
 
 `templates/[theme-name]/template.md` を作成します。
 
@@ -183,16 +197,16 @@ footer: ""
 ### サブセクション
 
 内容をここに記述
-
 ```
 
 **テンプレートのポイント:**
-- Front Matterの `theme:` をテーマ名に設定
+
+- Front Matter の `theme:` をテーマ名に設定
 - `<!-- _class: title -->` でタイトルスライド
 - よく使うスライドパターンを含める
 - 画像、コード、表などの例も含めると親切
 
-### ステップ6: scripts/new-slide.js の更新（自動対応）
+### ステップ 6: scripts/new-slide.js の更新（自動対応）
 
 `scripts/new-slide.js` は `themes/` ディレクトリを自動スキャンするため、**手動での編集は不要**です。
 
@@ -200,7 +214,7 @@ footer: ""
 
 ```javascript
 // themes/ ディレクトリを自動スキャン
-const themesDir = path.join(process.cwd(), 'themes');
+const themesDir = path.join(process.cwd(), "themes");
 const themes = fs.readdirSync(themesDir).filter((file) => {
   const stat = fs.statSync(path.join(themesDir, file));
   return stat.isDirectory();
@@ -217,7 +231,7 @@ make new
 # テーマ選択肢に新しいテーマが表示されることを確認
 ```
 
-### ステップ7: ドキュメントの更新
+### ステップ 7: ドキュメントの更新
 
 #### 7.1 `docs/themes.md` の更新
 
@@ -229,23 +243,25 @@ make new
 海をイメージした青いグラデーションテーマ。
 
 **特徴:**
+
 - 青系のグラデーション背景 (#667eea → #764ba2)
 - 白文字で高コントラスト
 - 爽やかで清潔感のあるデザイン
 
 **用途:**
+
 - ビジネスプレゼンテーション
 - 技術系セミナー
 - 清潔感を重視するプレゼン
 
 **使い方:**
 
-Front Matterで指定:
+Front Matter で指定:
 
-\`\`\`yaml
----
-theme: ocean
----
+## \`\`\`yaml
+
+## theme: ocean
+
 \`\`\`
 
 **カスタマイズ例:**
@@ -260,15 +276,19 @@ theme: ocean
 ## 🎨 利用可能なテーマ
 
 ### Default
+
 ...
 
 ### Gradient
+
 ...
 
 ### Darkmode
+
 ...
 
 ### Ocean
+
 海をイメージした爽やかなテーマ。
 
 - 青系のグラデーション
@@ -280,12 +300,12 @@ theme: ocean
 開発者向けドキュメントにテーマを追加した記録を残します。
 
 ```markdown
-3つのテーマが利用可能です：
+3 つのテーマが利用可能です：
 
-1. **default** (Marp標準テーマ)
+1. **default** (Marp 標準テーマ)
 2. **gradient** (`themes/gradient/gradient.css`)
 3. **darkmode** (`themes/darkmode/darkmode.css`)
-4. **ocean** (`themes/ocean/ocean.css`)  // 新規追加
+4. **ocean** (`themes/ocean/ocean.css`) // 新規追加
 ```
 
 ## テスト手順
@@ -303,7 +323,7 @@ make new
 
 ### 2. プレビューのテスト（VS Code）
 
-1. 生成されたMarkdownファイルを開く
+1. 生成された Markdown ファイルを開く
 2. コマンドパレット (`Cmd+Shift+P` / `Ctrl+Shift+P`) → "Marp: Open Preview"
 3. テーマが正しく適用されているか確認
 4. タイトルスライド、通常スライドのスタイルを確認
@@ -326,10 +346,10 @@ open dist/html/[ファイル名].html
 
 ### 4. 確認項目
 
-- [ ] VS Codeプレビューで正しく表示される
-- [ ] PDFで正しく生成される
-- [ ] PowerPointで正しく生成される
-- [ ] HTMLで正しく生成される
+- [ ] VS Code プレビューで正しく表示される
+- [ ] PDF で正しく生成される
+- [ ] PowerPoint で正しく生成される
+- [ ] HTML で正しく生成される
 - [ ] タイトルスライド (`<!-- _class: title -->`) が正しく表示される
 - [ ] 通常スライドが正しく表示される
 - [ ] フォントが正しく読み込まれている
@@ -340,20 +360,23 @@ open dist/html/[ファイル名].html
 
 ### テーマが認識されない
 
-**症状:** VS Codeプレビューやビルドでデフォルトテーマが適用される
+**症状:** VS Code プレビューやビルドでデフォルトテーマが適用される
 
 **解決方法:**
 
-1. **CSSファイルの確認**
+1. **CSS ファイルの確認**
+
    - `@theme [theme-name]` がファイル先頭にあるか
    - テーマ名がディレクトリ名と一致しているか
 
 2. **設定ファイルの確認**
+
    - `.vscode/settings.json` にパスが追加されているか
    - `.marprc.yml` にパスが追加されているか
 
-3. **VS Code再起動**
-   - 設定変更後はVS Codeを再起動
+3. **VS Code 再起動**
+
+   - 設定変更後は VS Code を再起動
 
 4. **ビルドで確認**
    ```bash
@@ -366,15 +389,17 @@ open dist/html/[ファイル名].html
 
 **解決方法:**
 
-1. **Google Fonts URLの確認**
+1. **Google Fonts URL の確認**
+
    ```css
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
    ```
 
-2. **font-familyの指定確認**
+2. **font-family の指定確認**
+
    ```css
    section {
-     font-family: 'Inter', 'Noto Sans JP', sans-serif;
+     font-family: "Inter", "Noto Sans JP", sans-serif;
    }
    ```
 
@@ -387,7 +412,8 @@ open dist/html/[ファイル名].html
 
 **解決方法:**
 
-1. **CSSセレクタの確認**
+1. **CSS セレクタの確認**
+
    ```css
    /* 正しい */
    section.title {
@@ -401,14 +427,17 @@ open dist/html/[ファイル名].html
    ```
 
 2. **アンダースコアの確認**
-   - Markdownでは `_class` (アンダースコア必須)
+
+   - Markdown では `_class` (アンダースコア必須)
 
 3. **コメントと見出しの間の空行**
+
    ```markdown
    <!-- _class: title -->
 
    # タイトル
    ```
+
    空行が必要
 
 ## Git ワークフロー
@@ -440,25 +469,26 @@ git commit -m "新規テーマ追加: ocean
 ### プルリクエスト
 
 1. リモートにプッシュ
+
    ```bash
    git push -u origin feature/new-theme-ocean
    ```
 
-2. GitHubでプルリクエストを作成
+2. GitHub でプルリクエストを作成
 
-3. PR説明に以下を含める：
+3. PR 説明に以下を含める：
    - テーマの特徴
    - 用途
-   - スクリーンショット (PDFのプレビュー画像など)
+   - スクリーンショット (PDF のプレビュー画像など)
    - テスト結果
 
 ## ベストプラクティス
 
-### CSSの構成
+### CSS の構成
 
 ```css
 /* 1. フォントのインポート */
-@import url('...');
+@import url("...");
 
 /* 2. テーマディレクティブ */
 /* @theme theme-name */
@@ -469,12 +499,16 @@ section {
 }
 
 /* 4. 見出しスタイル */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   /* 見出しのスタイル */
 }
 
 /* 5. テキストスタイル */
-p, a, code {
+p,
+a,
+code {
   /* テキスト関連 */
 }
 
@@ -555,8 +589,8 @@ a:hover {
 
 ## 参考資料
 
-- [Marp公式ドキュメント](https://marpit.marp.app/)
-- [Marp テーマCSS仕様](https://marpit.marp.app/theme-css)
+- [Marp 公式ドキュメント](https://marpit.marp.app/)
+- [Marp テーマ CSS 仕様](https://marpit.marp.app/theme-css)
 - [既存テーマ例: gradient](../themes/gradient/gradient.css)
 - [既存テーマ例: darkmode](../themes/darkmode/darkmode.css)
 - [Google Fonts](https://fonts.google.com/)

@@ -3,9 +3,14 @@
 This file provides guidance for AI coding agents (Codex, etc.) when creating slides in this repository.
 
 ⚠️ **Important: This document is for slide creation only**
+
 - Do NOT modify system files or add themes
 - Use ONLY `make` commands
 - Avoid direct file or directory manipulation
+
+## 重要
+
+- ユーザが Coding Agent を実行前に必ず、`docs/important-key.md`を確認してください。
 
 ## 🤖 User Request Response Flow
 
@@ -57,10 +62,13 @@ Respond to user requests by following the appropriate workflow below.
 2. Download/copy to `workspace/img/`
 3. Confirm with user: "Is this image OK?"
 4. If OK, insert into Markdown:
+
    ```markdown
    <!-- Source: https://example.com/page -->
+
    ![description](../img/image-name.png)
    ```
+
 5. Rebuild
 
 ### Key Principles
@@ -73,6 +81,7 @@ Respond to user requests by following the appropriate workflow below.
 ### Image Handling Rules
 
 ✅ **Allowed:**
+
 - User-provided image files
 - User-specified URL images
 - Basic shapes (rectangles, triangles, circles)
@@ -80,6 +89,7 @@ Respond to user requests by following the appropriate workflow below.
 - Diagrams (Mermaid syntax)
 
 ❌ **Forbidden:**
+
 - AI image generation (DALL-E, etc.)
 - Auto-fetching stock images (Unsplash, etc.)
 - Adding images without user instruction
@@ -90,12 +100,14 @@ When user wants partial design changes, **add inline CSS to the slide file**.
 Do NOT modify system theme files (`system/themes/`).
 
 **Steps:**
+
 1. Confirm what to change (color, font, size, etc.)
 2. Add `<style>` tag to slide file
 3. Preview to confirm
 4. Rebuild if OK
 
 **Example: Change title color**
+
 ```markdown
 ---
 marp: true
@@ -112,18 +124,27 @@ h1 {
 ```
 
 **Common customizations:**
+
 ```css
 /* Title color */
-h1 { color: #ff6600; }
+h1 {
+  color: #ff6600;
+}
 
 /* Background color */
-section { background-color: #f5f5f5; }
+section {
+  background-color: #f5f5f5;
+}
 
 /* Font size */
-section { font-size: 1.2em; }
+section {
+  font-size: 1.2em;
+}
 
 /* Specific slide only (scoped) */
-section.custom-slide { background: linear-gradient(to right, #667eea, #764ba2); }
+section.custom-slide {
+  background: linear-gradient(to right, #667eea, #764ba2);
+}
 ```
 
 ## Core Principles
@@ -131,6 +152,7 @@ section.custom-slide { background: linear-gradient(to right, #667eea, #764ba2); 
 ### Allowed Commands
 
 ✅ **Allowed Commands:**
+
 - `make new` - Create new slide
 - `make preview` - Live preview in browser
 - `make build` - Build all formats
@@ -141,6 +163,7 @@ section.custom-slide { background: linear-gradient(to right, #667eea, #764ba2); 
 - `make clean` - Clean generated files
 
 ❌ **Forbidden:**
+
 - Direct npm commands
 - Direct file/directory creation, editing, or deletion
 - Modifying theme files (`system/themes/`)
@@ -176,8 +199,8 @@ Open the generated Markdown file and edit the content.
 ```yaml
 ---
 marp: true
-theme: gradient  # Theme to use
-paginate: true   # Show page numbers
+theme: gradient # Theme to use
+paginate: true # Show page numbers
 header: "Header Text"
 footer: "Footer Text"
 ---
@@ -200,6 +223,7 @@ Three horizontal lines (`---`) start a new slide.
 ```
 
 **Available Classes:**
+
 - `title` - Title slide (centered)
 - `gradient` - Gradient background slide (gradient theme only)
 - `end` - End slide
@@ -208,10 +232,12 @@ Three horizontal lines (`---`) start a new slide.
 
 ```markdown
 # Size specification
+
 ![width:500px](../img/image.png)
 ![height:300px](../img/image.png)
 
 # Background image
+
 ![bg](../img/background.png)
 ```
 
@@ -253,11 +279,11 @@ def hello_world():
 #### Tables
 
 ```markdown
-| Item | Description | Note |
-| ---- | ----------- | ---- |
+| Item | Description | Note      |
+| ---- | ----------- | --------- |
 | A    | Data A      | Important |
 | B    | Data B      | Reference |
-| C    | Data C      | Note |
+| C    | Data C      | Note      |
 ```
 
 ### Step 3: Build
@@ -283,6 +309,7 @@ make build-one FILE=workspace/slides/my-presentation.md
 ```
 
 **Output Locations:**
+
 - PDF: `workspace/output/pdf/[filename].pdf`
 - PPTX: `workspace/output/pptx/[filename].pptx`
 - HTML: `workspace/output/html/[filename].html`
@@ -303,6 +330,7 @@ open workspace/output/html/my-presentation.html
 ### Slide Creation Request
 
 **User:**
+
 ```
 Create a new presentation titled "Project Progress Report" with the following content:
 1. Title slide
@@ -315,6 +343,7 @@ Use the gradient theme.
 ```
 
 **Agent Actions:**
+
 1. Execute `make new` to create file
 2. Select gradient theme
 3. Edit Markdown with specified content
@@ -324,11 +353,13 @@ Use the gradient theme.
 ### Modify Slide Content
 
 **User:**
+
 ```
 Add progress percentages to each item in the progress status section of workspace/slides/project-report.md.
 ```
 
 **Agent Actions:**
+
 1. Read `workspace/slides/project-report.md`
 2. Identify progress status section
 3. Add progress percentages to each item
@@ -337,11 +368,13 @@ Add progress percentages to each item in the progress status section of workspac
 ### Add Image
 
 **User:**
+
 ```
 Add an image to slide 3. Insert workspace/img/chart.png with 600px width.
 ```
 
 **Agent Actions:**
+
 1. Identify slide 3
 2. Insert image with correct relative path: `![width:600px](../img/chart.png)`
 3. Report changes made
@@ -353,6 +386,7 @@ Add an image to slide 3. Insert workspace/img/chart.png with 600px width.
 Standard Marp theme. Simple and universal.
 
 **Use Cases:**
+
 - Business presentations
 - When simple design is needed
 
@@ -361,10 +395,12 @@ Standard Marp theme. Simple and universal.
 Vibrant gradient theme.
 
 **Features:**
+
 - Purple gradient (#667eea → #764ba2)
 - Bright and vibrant design
 
 **Use Cases:**
+
 - Creative presentations
 - Events and seminars
 
@@ -373,10 +409,12 @@ Vibrant gradient theme.
 Modern dark mode theme.
 
 **Features:**
+
 - Dark background with blue accents (#a5c9ff)
 - Eye-friendly design
 
 **Use Cases:**
+
 - Technical presentations
 - Presentations in dark venues
 
@@ -390,7 +428,7 @@ A: Modify `theme:` in the Front Matter of the Markdown file.
 
 ```yaml
 ---
-theme: gradient  # → Change to theme: darkmode
+theme: gradient # → Change to theme: darkmode
 ---
 ```
 
@@ -422,6 +460,7 @@ A: Directly reorder slide sections in Markdown. Move sections separated by `---`
 ### Q: Build error occurred
 
 A: Check the following:
+
 1. Front Matter format is correct (has `---` before and after)
 2. Image paths are correct
 3. Refer to `docs/troubleshooting.md`
@@ -451,12 +490,14 @@ Modifying these can break the entire system.
 This system is designed for the following purposes only:
 
 ✅ **Allowed Operations:**
+
 - Creating new slides (`make new`)
 - Editing slide content (Markdown files in `workspace/slides/`)
 - Building slides (`make build`, etc.)
 - Adding assets (image files in `workspace/img/`)
 
 ❌ **Forbidden Operations:**
+
 - Adding new themes
 - Modifying existing themes
 - Modifying scripts or Makefile

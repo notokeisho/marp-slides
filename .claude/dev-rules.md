@@ -4,14 +4,18 @@
 このファイルはシステム開発・テーマ開発時のみ使用してください。
 **スライド作成時は使用禁止です。** スライド作成時は `CLAUDE.md` を使用してください。
 
+## 重要
+
+- ユーザが Coding Agent を実行前に必ず、`docs/important-key.md`を確認してください。
+
 ## 🔧 開発リクエスト対応フロー
 
 ### 「テーマを追加して」「新しいテーマを作りたい」と言われたら
 
 1. `.claude/theme-development.md` を読む
-2. 7ステップの手順に従ってテーマを作成：
+2. 7 ステップの手順に従ってテーマを作成：
    - ディレクトリ作成
-   - CSSファイル作成
+   - CSS ファイル作成
    - 設定ファイル登録
    - テンプレート作成
    - ドキュメント更新
@@ -39,18 +43,18 @@ npm run [script]          # package.jsonスクリプト実行
 
 ### 編集可能なファイル（開発時のみ）
 
-- `system/themes/` - テーマCSS
+- `system/themes/` - テーマ CSS
 - `system/templates/` - テンプレート
-- `system/scripts/` - Node.jsスクリプト
-- `.vscode/settings.json` - VS Code設定
-- `.marprc.yml` - Marp CLI設定
+- `system/scripts/` - Node.js スクリプト
+- `.vscode/settings.json` - VS Code 設定
+- `.marprc.yml` - Marp CLI 設定
 - `Makefile` - ビルド設定
 - `package.json` - 依存関係
 - `docs/` - ドキュメント
 
 ## プロジェクト概要
 
-Marp（Markdown Presentation Ecosystem）スライド管理リポジトリです。MarkdownファイルはMarp CLIを使用してPDF、PowerPoint、HTMLプレゼンテーションに変換されます。
+Marp（Markdown Presentation Ecosystem）スライド管理リポジトリです。Markdown ファイルは Marp CLI を使用して PDF、PowerPoint、HTML プレゼンテーションに変換されます。
 
 ## アーキテクチャ
 
@@ -96,45 +100,52 @@ docs/                       # ドキュメント
 
 ### テーマシステム
 
-3つのテーマが利用可能です：
+3 つのテーマが利用可能です：
 
-1. **default** (Marp標準テーマ)
-   - Marpのデフォルトテーマ
+1. **default** (Marp 標準テーマ)
+
+   - Marp のデフォルトテーマ
    - シンプルで汎用的なデザイン
-   - テンプレートのみ存在（CSSファイルなし）
-   - 使用方法: Front Matterで`theme: default`
+   - テンプレートのみ存在（CSS ファイルなし）
+   - 使用方法: Front Matter で`theme: default`
 
 2. **gradient** (`system/themes/gradient/gradient.css`)
+
    - グラデーションオーバーレイ付き明るい背景
    - 紫色のカラースキーム (#667eea → #764ba2)
-   - 使用方法: Front Matterで`theme: gradient`
+   - 使用方法: Front Matter で`theme: gradient`
 
 3. **darkmode** (`system/themes/darkmode/darkmode.css`)
    - 放射状グラデーション付きダーク背景
    - 青色のカラースキーム (#a5c9ff)
-   - Marpの"gaia"テーマをベースにカスタマイズ
-   - 使用方法: Front Matterで`theme: darkmode`
+   - Marp の"gaia"テーマをベースにカスタマイズ
+   - 使用方法: Front Matter で`theme: darkmode`
 
 カスタムテーマ（gradient, darkmode）の共通点：
+
 - Google Fonts（Inter、Noto Sans JP）をインポート
 - `.vscode/settings.json`と`.marprc.yml`に登録されている
-- CSSファイルの先頭で`@theme [名前]`を使用する必要がある
+- CSS ファイルの先頭で`@theme [名前]`を使用する必要がある
 
-### Marp設定
+### Marp 設定
 
-**VS Code統合:**
+**VS Code 統合:**
+
 - `.vscode/extensions.json`: 推奨拡張機能リスト（Marp for VS Code）
-- `.vscode/settings.json`: Marp for VS Code拡張機能用にテーマパスを登録
+- `.vscode/settings.json`: Marp for VS Code 拡張機能用にテーマパスを登録
 
-**CLI設定:**
+**CLI 設定:**
+
 - `.marprc.yml`: コマンドライン用にテーマを登録
 
 **ビルドオプション:**
+
 - すべてのビルドで`--allow-local-files`フラグを使用してローカル画像参照を許可
 
 ### 必須拡張機能
 
 **Marp for VS Code** (`marp-team.marp-vscode`)
+
 - リポジトリを開くと自動的にインストールを提案
 - `.vscode/extensions.json`に定義済み
 - カスタムテーマ（gradient, darkmode）を使用するために必須
@@ -149,8 +160,9 @@ make install              # npmパッケージのインストール (Marp CLI, i
 ```
 
 **インストールされるもの:**
-- `@marp-team/marp-cli`: Markdownからスライドを生成
-- `inquirer`: `make new`でのインタラクティブUI
+
+- `@marp-team/marp-cli`: Markdown からスライドを生成
+- `inquirer`: `make new`でのインタラクティブ UI
 
 ### 開発用コマンド
 
@@ -186,40 +198,44 @@ make help
 詳細は `.claude/theme-development.md` を参照してください。
 
 **概要:**
+
 1. `system/themes/new-theme/` ディレクトリ作成
 2. `system/themes/new-theme/new-theme.css` 作成（`@theme new-theme` ディレクティブ必須）
 3. `.vscode/settings.json` と `.marprc.yml` に登録
 4. `system/templates/new-theme/template.md` 作成
 5. ドキュメント更新（`docs/themes.md`, `README.md`）
 
-## Gitワークフロー
+## Git ワークフロー
 
 **コミット対象:**
-- `workspace/slides/` 内のMarkdownファイル
+
+- `workspace/slides/` 内の Markdown ファイル
 - `workspace/img/` 内の画像ファイル
 - `system/templates/` 内のテンプレートファイル
 - `system/themes/` 内のテーマファイル
 - 設定ファイル（`.vscode/`, `.marprc.yml`, `Makefile`, `package.json`）
 
 **コミット対象外:**
+
 - `workspace/output/` 内の生成物（PDF, PPTX, HTML）
 - `node_modules/`
-- OSファイル（`.DS_Store`, `Thumbs.db`）
+- OS ファイル（`.DS_Store`, `Thumbs.db`）
 
 **ブランチ命名規則:**
+
 - `feature/new-theme-ocean` - 新テーマ追加
 - `feature/presentation-name` - スライド作成（通常はスライド作成者が使用）
 - `fix/theme-gradient-header` - テーマバグ修正
 
 ## 重要な注意事項
 
-### Marp固有の制約
+### Marp 固有の制約
 
-- MarpはYAML Front Matterの厳密なフォーマットを要求（前後に3つのダッシュ）
+- Marp は YAML Front Matter の厳密なフォーマットを要求（前後に 3 つのダッシュ）
 - スライドは`---`で区切られる（独立した行である必要がある）
-- Front Matterのテーマ名はCSSの`@theme`ディレクティブと完全に一致する必要がある
-- ローカル画像参照には`--allow-local-files`フラグが必要（Makefileに含まれている）
-- 出力ファイル名のパターンはMakefileのロジックを変更しない限り変更不可
+- Front Matter のテーマ名は CSS の`@theme`ディレクティブと完全に一致する必要がある
+- ローカル画像参照には`--allow-local-files`フラグが必要（Makefile に含まれている）
+- 出力ファイル名のパターンは Makefile のロジックを変更しない限り変更不可
 
 ### システム設計上の制約
 
@@ -237,6 +253,6 @@ make help
 
 ## 参考資料
 
-- [Marp公式ドキュメント](https://marpit.marp.app/)
+- [Marp 公式ドキュメント](https://marpit.marp.app/)
 - [Marp CLI](https://github.com/marp-team/marp-cli)
 - [Marp for VS Code](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)
