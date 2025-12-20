@@ -84,6 +84,48 @@ Respond to user requests by following the appropriate workflow below.
 - Auto-fetching stock images (Unsplash, etc.)
 - Adding images without user instruction
 
+### When user says "Change design" / "Customize style"
+
+When user wants partial design changes, **add inline CSS to the slide file**.
+Do NOT modify system theme files (`system/themes/`).
+
+**Steps:**
+1. Confirm what to change (color, font, size, etc.)
+2. Add `<style>` tag to slide file
+3. Preview to confirm
+4. Rebuild if OK
+
+**Example: Change title color**
+```markdown
+---
+marp: true
+theme: gradient
+---
+
+<style>
+h1 {
+  color: #ff6600;
+}
+</style>
+
+# Orange Title
+```
+
+**Common customizations:**
+```css
+/* Title color */
+h1 { color: #ff6600; }
+
+/* Background color */
+section { background-color: #f5f5f5; }
+
+/* Font size */
+section { font-size: 1.2em; }
+
+/* Specific slide only (scoped) */
+section.custom-slide { background: linear-gradient(to right, #667eea, #764ba2); }
+```
+
 ## Core Principles
 
 ### Allowed Commands

@@ -146,6 +146,57 @@ def hello_world():
 | C    | データ C | 補足 |
 ```
 
+### デザインのカスタマイズ
+
+テーマの一部を変更したい場合、スライドファイル内に `<style>` タグでCSSを追加できます。
+システムテーマファイルを変更する必要はありません。
+
+```markdown
+---
+marp: true
+theme: gradient
+---
+
+<style>
+/* タイトルの色を変更 */
+h1 {
+  color: #ff6600;
+}
+
+/* 背景色を変更 */
+section {
+  background-color: #f5f5f5;
+}
+</style>
+
+# カスタマイズされたタイトル
+```
+
+**よく使うカスタマイズ：**
+
+| 対象 | CSS例 |
+|------|-------|
+| タイトル色 | `h1 { color: #ff6600; }` |
+| 背景色 | `section { background-color: #f5f5f5; }` |
+| フォントサイズ | `section { font-size: 1.2em; }` |
+| テキスト色 | `section { color: #333; }` |
+| リンク色 | `a { color: #0066cc; }` |
+
+**特定のスライドのみカスタマイズ：**
+
+```markdown
+<!-- _class: custom-slide -->
+
+# このスライドだけ特別なデザイン
+```
+
+```css
+section.custom-slide {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: white;
+}
+```
+
 ## スライドのビルド
 
 ### 全スライドをビルド

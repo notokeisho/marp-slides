@@ -84,6 +84,48 @@
 - ストック画像の自動取得（Unsplash等）
 - ユーザー指示なしの画像追加
 
+### 「デザインを変更して」と言われたら
+
+ユーザーがデザインの部分的な変更を希望した場合、**スライドファイル内にインラインCSSを追加**します。
+システムテーマファイル（`system/themes/`）は変更しません。
+
+**手順：**
+1. 変更内容を確認（色、フォント、サイズなど）
+2. スライドファイルに `<style>` タグを追加
+3. プレビューで確認
+4. OKなら再ビルド
+
+**例：タイトルの色を変更したい場合**
+```markdown
+---
+marp: true
+theme: gradient
+---
+
+<style>
+h1 {
+  color: #ff6600;
+}
+</style>
+
+# オレンジ色のタイトル
+```
+
+**よく使うカスタマイズ例：**
+```css
+/* タイトルの色 */
+h1 { color: #ff6600; }
+
+/* 背景色 */
+section { background-color: #f5f5f5; }
+
+/* フォントサイズ */
+section { font-size: 1.2em; }
+
+/* 特定スライドのみ変更（scoped） */
+section.custom-slide { background: linear-gradient(to right, #667eea, #764ba2); }
+```
+
 ## 基本方針
 
 ### 使用できるコマンド
