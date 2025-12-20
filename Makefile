@@ -108,6 +108,43 @@ build-one: check-marp
 	marp --html --allow-local-files "$(FILE)" -o "workspace/output/html/$$base.html"; \
 	echo "✅ Built: workspace/output/{pdf,pptx,html}/$$base.*"
 
+# 単一ファイル・単一形式ビルド
+pdf-one: check-marp
+	@if [ -z "$(FILE)" ]; then \
+		echo "❌ Error: FILE parameter required"; \
+		echo "Usage: make pdf-one FILE=workspace/slides/example.md"; \
+		exit 1; \
+	fi
+	@echo "Building PDF: $(FILE)..."
+	@mkdir -p workspace/output/pdf
+	@base=$$(basename $(FILE) .md); \
+	marp --pdf --allow-local-files "$(FILE)" -o "workspace/output/pdf/$$base.pdf"; \
+	echo "✅ Built: workspace/output/pdf/$$base.pdf"
+
+pptx-one: check-marp
+	@if [ -z "$(FILE)" ]; then \
+		echo "❌ Error: FILE parameter required"; \
+		echo "Usage: make pptx-one FILE=workspace/slides/example.md"; \
+		exit 1; \
+	fi
+	@echo "Building PPTX: $(FILE)..."
+	@mkdir -p workspace/output/pptx
+	@base=$$(basename $(FILE) .md); \
+	marp --pptx --allow-local-files "$(FILE)" -o "workspace/output/pptx/$$base.pptx"; \
+	echo "✅ Built: workspace/output/pptx/$$base.pptx"
+
+html-one: check-marp
+	@if [ -z "$(FILE)" ]; then \
+		echo "❌ Error: FILE parameter required"; \
+		echo "Usage: make html-one FILE=workspace/slides/example.md"; \
+		exit 1; \
+	fi
+	@echo "Building HTML: $(FILE)..."
+	@mkdir -p workspace/output/html
+	@base=$$(basename $(FILE) .md); \
+	marp --html --allow-local-files "$(FILE)" -o "workspace/output/html/$$base.html"; \
+	echo "✅ Built: workspace/output/html/$$base.html"
+
 # クリーンアップ
 clean:
 	@echo "Cleaning generated files..."
