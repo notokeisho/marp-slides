@@ -71,6 +71,7 @@ Respond to user requests by following the appropriate workflow below.
 - `make pdf-one FILE=workspace/slides/xxx.md` - Build specific file (PDF only)
 - `make pptx-one FILE=workspace/slides/xxx.md` - Build specific file (PPTX only)
 - `make html-one FILE=workspace/slides/xxx.md` - Build specific file (HTML only)
+- `make mermaid FILE=workspace/img/xxx.mmd` - Convert Mermaid to PNG
 - `make clean` - Clean generated files
 
 ❌ **Forbidden:**

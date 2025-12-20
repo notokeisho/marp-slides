@@ -100,6 +100,7 @@ make build-one FILE=...   # 単一ファイル全形式ビルド
 make pdf-one FILE=...     # 単一ファイルPDFのみ
 make pptx-one FILE=...    # 単一ファイルPPTXのみ
 make html-one FILE=...    # 単一ファイルHTMLのみ
+make mermaid FILE=...     # Mermaid図をPNGに変換
 make clean                # 生成物削除
 make help                 # ヘルプ表示
 ```

@@ -223,8 +223,15 @@ make build-one FILE=workspace/slides/[ファイル名].md
 
 **許可される図形生成：**
 - 基本図形（四角、三角、丸など）
-- フローチャート（Mermaid記法）
-- ダイアグラム（Mermaid記法）
+- フローチャート（Mermaid → PNG変換が必要）
+- ダイアグラム（Mermaid → PNG変換が必要）
+
+**Mermaid図の使い方：**
+1. `workspace/img/diagram.mmd` にMermaid記法で図を作成
+2. `make mermaid FILE=workspace/img/diagram.mmd` で PNG に変換
+3. スライドに `![](../img/diagram.png)` で挿入
+
+詳細: [Mermaidガイド](mermaid.md)
 
 ### 「テーマを変えて」
 

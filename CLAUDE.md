@@ -165,6 +165,7 @@ section.custom-slide {
 - `make pdf-one FILE=workspace/slides/xxx.md` - 特定ファイルPDFのみ
 - `make pptx-one FILE=workspace/slides/xxx.md` - 特定ファイルPPTXのみ
 - `make html-one FILE=workspace/slides/xxx.md` - 特定ファイルHTMLのみ
+- `make mermaid FILE=workspace/img/xxx.mmd` - Mermaid図をPNGに変換
 - `make clean` - 生成物の削除
 
 ❌ **使用禁止:**
