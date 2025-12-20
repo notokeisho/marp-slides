@@ -6,17 +6,6 @@ Markdown でスライドを書き、PDF/PowerPoint/HTML に自動変換します
 ## 🎨 テーマ
 
 <details open>
-<summary><strong>Default</strong> - シンプルで汎用的</summary>
-
-<br>
-
-![Default Theme](docs/images/theme-default.png)
-
-Marp標準テーマ。ミニマルデザインでビジネス用途に最適。
-
-</details>
-
-<details>
 <summary><strong>Gradient</strong> - 華やかなグラデーション</summary>
 
 <br>
@@ -24,6 +13,17 @@ Marp標準テーマ。ミニマルデザインでビジネス用途に最適。
 ![Gradient Theme](docs/images/theme-gradient.png)
 
 紫色のグラデーション (#667eea → #764ba2)。クリエイティブなプレゼンテーションに。
+
+</details>
+
+<details>
+<summary><strong>Default</strong> - シンプルで汎用的</summary>
+
+<br>
+
+![Default Theme](docs/images/theme-default.png)
+
+Marp標準テーマ。ミニマルデザインでビジネス用途に最適。
 
 </details>
 
