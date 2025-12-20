@@ -4,6 +4,50 @@
 このファイルはシステム開発・テーマ開発時のみ使用してください。
 **スライド作成時は使用禁止です。** スライド作成時は `CLAUDE.md` を使用してください。
 
+## 🔧 開発リクエスト対応フロー
+
+### 「テーマを追加して」「新しいテーマを作りたい」と言われたら
+
+1. `.claude/theme-development.md` を読む
+2. 7ステップの手順に従ってテーマを作成：
+   - ディレクトリ作成
+   - CSSファイル作成
+   - 設定ファイル登録
+   - テンプレート作成
+   - ドキュメント更新
+   - テスト
+3. 完了したら報告
+
+### 「システムを修正して」「スクリプトを変更して」と言われたら
+
+1. 変更対象を確認（scripts/, Makefile, 設定ファイル等）
+2. 変更内容を確認
+3. 変更を実施
+4. テスト
+5. 変更内容を報告
+
+### 開発で使用可能なコマンド
+
+```bash
+make install              # セットアップ
+make new                  # スライド作成テスト
+make build                # ビルドテスト
+make clean                # クリーンアップ
+npm install               # 依存パッケージインストール
+npm run [script]          # package.jsonスクリプト実行
+```
+
+### 編集可能なファイル（開発時のみ）
+
+- `themes/` - テーマCSS
+- `templates/` - テンプレート
+- `scripts/` - Node.jsスクリプト
+- `.vscode/settings.json` - VS Code設定
+- `.marprc.yml` - Marp CLI設定
+- `Makefile` - ビルド設定
+- `package.json` - 依存関係
+- `docs/` - ドキュメント
+
 ## プロジェクト概要
 
 Marp（Markdown Presentation Ecosystem）スライド管理リポジトリです。MarkdownファイルはMarp CLIを使用してPDF、PowerPoint、HTMLプレゼンテーションに変換されます。
