@@ -1,6 +1,6 @@
 # Marp Slides Management Makefile
 
-.PHONY: help build pdf pptx html clean install check-marp new preview
+.PHONY: help build pdf pptx html clean install check-marp new preview mermaid
 
 # デフォルトターゲット
 help:
@@ -16,6 +16,9 @@ help:
 	@echo ""
 	@echo "Single file build:"
 	@echo "  make build-one FILE=workspace/slides/example.md"
+	@echo ""
+	@echo "Mermaid diagram:"
+	@echo "  make mermaid FILE=workspace/img/diagram.mmd"
 
 # 必要なツールをインストール
 install:
@@ -161,3 +164,23 @@ clean:
 	@echo "Cleaning generated files..."
 	rm -rf workspace/output/pdf/* workspace/output/pptx/* workspace/output/html/*
 	@echo "✅ Cleaned workspace/output/ directories"
+
+# Mermaid図をPNGに変換
+mermaid:
+	@if [ -z "$(FILE)" ]; then \
+		echo "❌ Error: FILE parameter required"; \
+		echo "Usage: make mermaid FILE=workspace/img/diagram.mmd"; \
+		echo ""; \
+		echo "Example .mmd file content:"; \
+		echo "  graph LR"; \
+		echo "    A[Start] --> B[End]"; \
+		exit 1; \
+	fi
+	@if [ ! -f "$(FILE)" ]; then \
+		echo "❌ File not found: $(FILE)"; \
+		exit 1; \
+	fi
+	@echo "🎨 Converting Mermaid to PNG..."
+	@output=$$(echo "$(FILE)" | sed 's/\.mmd$$/.png/'); \
+	npx mmdc -i "$(FILE)" -o "$$output" -b transparent; \
+	echo "✅ Created: $$output"
