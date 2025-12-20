@@ -2,6 +2,7 @@
 workspace/output/pdf/*
 workspace/output/pptx/*
 workspace/output/html/*
+workspace/
 
 # .gitkeepは残す
 !workspace/output/pdf/.gitkeep
