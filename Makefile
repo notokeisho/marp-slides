@@ -36,7 +36,7 @@ check-marp:
 
 # 新規スライド作成
 new:
-	@node system/scripts/new-slide.js
+	@node system/scripts/new-slide.js $(if $(NAME),--name=$(NAME)) $(if $(THEME),--theme=$(THEME))
 
 # ライブプレビュー（ブラウザで表示、保存時に自動更新）
 preview: check-marp
