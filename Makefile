@@ -1,12 +1,13 @@
 # Marp Slides Management Makefile
 
-.PHONY: help build pdf pptx html clean install check-marp new
+.PHONY: help build pdf pptx html clean install check-marp new preview
 
 # デフォルトターゲット
 help:
 	@echo "Marp Slides Build Commands:"
 	@echo "  make install  - Install Marp CLI globally"
 	@echo "  make new      - Create new slide (interactive)"
+	@echo "  make preview  - Live preview in browser"
 	@echo "  make build    - Build all formats (PDF, PPTX, HTML)"
 	@echo "  make pdf      - Convert all .md to PDF"
 	@echo "  make pptx     - Convert all .md to PowerPoint"
@@ -36,6 +37,21 @@ check-marp:
 # 新規スライド作成
 new:
 	@node system/scripts/new-slide.js
+
+# ライブプレビュー（ブラウザで表示、保存時に自動更新）
+preview: check-marp
+	@echo "Available slides:"
+	@ls -1 workspace/slides/*.md 2>/dev/null | sed 's/workspace\/slides\//  /' | sed 's/\.md$$//' || echo "  (no slides found)"
+	@echo ""
+	@read -p "Enter filename (without .md): " file; \
+	if [ -f "workspace/slides/$$file.md" ]; then \
+		echo "🔍 Starting preview server..."; \
+		echo "   Press Ctrl+C to stop"; \
+		marp --preview --allow-local-files "workspace/slides/$$file.md"; \
+	else \
+		echo "❌ File not found: workspace/slides/$$file.md"; \
+		exit 1; \
+	fi
 
 # 全形式ビルド
 build: pdf pptx html

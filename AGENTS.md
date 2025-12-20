@@ -43,6 +43,14 @@ Respond to user requests by following the appropriate workflow below.
 1. Execute `make build`
 2. Report generated file paths
 
+### When user says "Preview"
+
+1. Execute `make preview`
+2. Enter filename (without .md extension)
+3. Browser preview opens automatically
+4. Edits auto-refresh on save
+5. Stop with Ctrl+C
+
 ### Key Principles
 
 - **Always ask**: Don't guess missing information, ask the user
@@ -55,6 +63,7 @@ Respond to user requests by following the appropriate workflow below.
 
 ✅ **Allowed Commands:**
 - `make new` - Create new slide
+- `make preview` - Live preview in browser
 - `make build` - Build all formats
 - `make pdf` - Build PDF only
 - `make pptx` - Build PowerPoint only
