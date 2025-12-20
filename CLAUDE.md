@@ -153,7 +153,8 @@ section.custom-slide {
 
 ✅ **使用可能なコマンド:**
 
-- `make new` - 新規スライド作成
+- `make new` - 新規スライド作成（対話型）
+- `make new NAME=xxx THEME=yyy` - 新規スライド作成（非対話型・AI向け）
 - `make preview` - ブラウザでライブプレビュー
 - `make build` - 全形式ビルド
 - `make pdf` - PDF のみビルド（全ファイル）
@@ -183,16 +184,22 @@ section.custom-slide {
 ### ステップ 1: 新規スライドの作成
 
 ```bash
+# 対話型（ユーザー向け）
 make new
+
+# 非対話型（AI向け）
+make new NAME=my-presentation THEME=gradient
 ```
 
-1. **ファイル名を入力** (拡張子なし)
-   - 例: `my-presentation`, `team-meeting`
-2. **テーマを選択** (矢印キーで選択、Enter で確定)
-   - `default` - シンプルな標準テーマ
-   - `gradient` - 紫のグラデーションテーマ
-   - `darkmode` - ダークモードテーマ
-3. `workspace/slides/[filename].md` が自動生成されます
+**対話型の場合：**
+1. ファイル名を入力 (拡張子なし)
+2. テーマを選択 (矢印キーで選択)
+
+**非対話型の場合：**
+- NAME: ファイル名（拡張子なし）
+- THEME: default / gradient / darkmode
+
+どちらの場合も `workspace/slides/[filename].md` が自動生成されます
 
 ### ステップ 2: スライドの編集
 

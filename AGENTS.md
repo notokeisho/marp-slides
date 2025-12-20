@@ -153,7 +153,8 @@ section.custom-slide {
 
 ✅ **Allowed Commands:**
 
-- `make new` - Create new slide
+- `make new` - Create new slide (interactive)
+- `make new NAME=xxx THEME=yyy` - Create new slide (non-interactive, for AI)
 - `make preview` - Live preview in browser
 - `make build` - Build all formats
 - `make pdf` - Build PDF only (all files)
@@ -183,16 +184,22 @@ Only when `make` commands don't work, refer to manual commands in `docs/troubles
 ### Step 1: Create New Slide
 
 ```bash
+# Interactive (for users)
 make new
+
+# Non-interactive (for AI agents)
+make new NAME=my-presentation THEME=gradient
 ```
 
-1. **Enter filename** (without extension)
-   - Example: `my-presentation`, `team-meeting`
-2. **Select theme** (use arrow keys, Enter to confirm)
-   - `default` - Simple standard theme
-   - `gradient` - Purple gradient theme
-   - `darkmode` - Dark mode theme
-3. File `workspace/slides/[filename].md` will be auto-generated
+**Interactive mode:**
+1. Enter filename (without extension)
+2. Select theme (use arrow keys)
+
+**Non-interactive mode:**
+- NAME: filename (without extension)
+- THEME: default / gradient / darkmode
+
+Both modes generate `workspace/slides/[filename].md`
 
 ### Step 2: Edit Slide Content
 

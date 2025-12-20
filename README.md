@@ -67,7 +67,8 @@ AI エージェントを使わずに直接コマンドで操作したい場合�
 
 ```bash
 make install  # セットアップ
-make new      # スライド作成
+make new      # スライド作成（対話型）
+make new NAME=xxx THEME=yyy  # スライド作成（非対話型）
 make preview  # スライドのプレビュー
 make build    # ビルド
 ```
@@ -89,7 +90,8 @@ make build    # ビルド
 
 ```bash
 make install              # セットアップ
-make new                  # 新規スライド作成
+make new                  # 新規スライド作成（対話型）
+make new NAME=xxx THEME=yyy  # 新規スライド作成（非対話型）
 make preview              # ブラウザプレビュー
 make build                # 全形式ビルド
 make build-one FILE=...   # 単一ファイル全形式ビルド
