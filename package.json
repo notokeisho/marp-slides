@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^4.0.0",
+    "@mermaid-js/mermaid-cli": "^11.4.0",
     "inquirer": "^9.2.0"
   },
   "engines": {
