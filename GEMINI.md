@@ -7,6 +7,48 @@ This file provides guidance for Gemini CLI when creating slides in this reposito
 - Use ONLY `make` commands
 - Avoid direct file or directory manipulation
 
+## 🤖 User Request Response Flow
+
+Respond to user requests by following the appropriate workflow below.
+
+### When user says "Set up" / "Setup" / "Install"
+
+1. Read `docs/workflow-setup.md`
+2. Follow the workflow to execute setup autonomously
+3. Ask user if anything is unclear
+4. Report completion
+
+### When user says "Create slides" / "Make a presentation"
+
+1. Read `docs/workflow-slide-creation.md`
+2. Follow the workflow interactively:
+   - Ask for filename
+   - Ask for theme (default / gradient / darkmode)
+   - Ask for slide content
+3. Execute `make new`
+4. Edit Markdown
+5. Execute `make build`
+6. Report generated file paths
+
+### When user says "Edit slides" / "Modify presentation"
+
+1. Confirm target file (ask if unclear)
+2. Confirm changes needed (ask if unclear)
+3. Edit Markdown
+4. Execute `make build` if needed
+5. Report changes made
+
+### When user says "Build"
+
+1. Execute `make build`
+2. Report generated file paths
+
+### Key Principles
+
+- **Always ask**: Don't guess missing information, ask the user
+- **make commands only**: Don't use npm or other direct commands
+- **Protect system files**: Never modify themes/, scripts/, Makefile, etc.
+
 ## Core Principles
 
 ### Allowed Commands
