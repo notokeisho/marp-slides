@@ -156,10 +156,13 @@ section.custom-slide {
 - `make new` - 新規スライド作成
 - `make preview` - ブラウザでライブプレビュー
 - `make build` - 全形式ビルド
-- `make pdf` - PDF のみビルド
-- `make pptx` - PowerPoint のみビルド
-- `make html` - HTML のみビルド
-- `make build-one FILE=workspace/slides/xxx.md` - 特定のファイルのみビルド
+- `make pdf` - PDF のみビルド（全ファイル）
+- `make pptx` - PowerPoint のみビルド（全ファイル）
+- `make html` - HTML のみビルド（全ファイル）
+- `make build-one FILE=workspace/slides/xxx.md` - 特定ファイル全形式ビルド
+- `make pdf-one FILE=workspace/slides/xxx.md` - 特定ファイルPDFのみ
+- `make pptx-one FILE=workspace/slides/xxx.md` - 特定ファイルPPTXのみ
+- `make html-one FILE=workspace/slides/xxx.md` - 特定ファイルHTMLのみ
 - `make clean` - 生成物の削除
 
 ❌ **使用禁止:**

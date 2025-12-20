@@ -62,10 +62,13 @@ Respond to user requests by following the appropriate workflow below.
 
 - `make new` - Create new slide
 - `make build` - Build all formats
-- `make pdf` - Build PDF only
-- `make pptx` - Build PowerPoint only
-- `make html` - Build HTML only
-- `make build-one FILE=slides/xxx.md` - Build specific file
+- `make pdf` - Build PDF only (all files)
+- `make pptx` - Build PowerPoint only (all files)
+- `make html` - Build HTML only (all files)
+- `make build-one FILE=workspace/slides/xxx.md` - Build specific file (all formats)
+- `make pdf-one FILE=workspace/slides/xxx.md` - Build specific file (PDF only)
+- `make pptx-one FILE=workspace/slides/xxx.md` - Build specific file (PPTX only)
+- `make html-one FILE=workspace/slides/xxx.md` - Build specific file (HTML only)
 - `make clean` - Clean generated files
 
 ❌ **Forbidden:**
