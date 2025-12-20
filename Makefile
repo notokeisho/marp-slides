@@ -40,17 +40,28 @@ new:
 
 # ライブプレビュー（ブラウザで表示、保存時に自動更新）
 preview: check-marp
-	@echo "Available slides:"
-	@ls -1 workspace/slides/*.md 2>/dev/null | sed 's/workspace\/slides\//  /' | sed 's/\.md$$//' || echo "  (no slides found)"
-	@echo ""
-	@read -p "Enter filename (without .md): " file; \
-	if [ -f "workspace/slides/$$file.md" ]; then \
-		echo "🔍 Starting preview server..."; \
-		echo "   Press Ctrl+C to stop"; \
-		marp --preview --allow-local-files "workspace/slides/$$file.md"; \
+	@if [ -n "$(FILE)" ]; then \
+		if [ -f "$(FILE)" ]; then \
+			echo "🔍 Starting preview server..."; \
+			echo "   Press Ctrl+C to stop"; \
+			marp --preview --allow-local-files "$(FILE)"; \
+		else \
+			echo "❌ File not found: $(FILE)"; \
+			exit 1; \
+		fi \
 	else \
-		echo "❌ File not found: workspace/slides/$$file.md"; \
-		exit 1; \
+		echo "Available slides:"; \
+		ls -1 workspace/slides/*.md 2>/dev/null | sed 's/workspace\/slides\//  /' | sed 's/\.md$$//' || echo "  (no slides found)"; \
+		echo ""; \
+		read -p "Enter filename (without .md): " file; \
+		if [ -f "workspace/slides/$$file.md" ]; then \
+			echo "🔍 Starting preview server..."; \
+			echo "   Press Ctrl+C to stop"; \
+			marp --preview --allow-local-files "workspace/slides/$$file.md"; \
+		else \
+			echo "❌ File not found: workspace/slides/$$file.md"; \
+			exit 1; \
+		fi \
 	fi
 
 # 全形式ビルド
