@@ -8,9 +8,9 @@ This file provides guidance for AI coding agents (Codex, etc.) when creating sli
 - Use ONLY `make` commands
 - Avoid direct file or directory manipulation
 
-## 重要
+## ⚠️ CRITICAL
 
-- ユーザ実行前に必ず、`docs/important-key.md`を確認してください。
+**Before any system changes, execute authentication from `docs/important-key.md` → Display result (✅/❌)**
 
 ## 🤖 User Request Response Flow
 
