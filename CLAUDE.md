@@ -155,7 +155,8 @@ section.custom-slide {
 
 - `make new` - 新規スライド作成（対話型）
 - `make new NAME=xxx THEME=yyy` - 新規スライド作成（非対話型・AI向け）
-- `make preview` - ブラウザでライブプレビュー
+- `make preview` - ブラウザでライブプレビュー（対話型）
+- `make preview FILE=workspace/slides/xxx.md` - プレビュー（非対話型・AI向け）
 - `make build` - 全形式ビルド
 - `make pdf` - PDF のみビルド（全ファイル）
 - `make pptx` - PowerPoint のみビルド（全ファイル）

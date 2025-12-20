@@ -62,6 +62,7 @@ Respond to user requests by following the appropriate workflow below.
 
 - `make new` - Create new slide (interactive)
 - `make new NAME=xxx THEME=yyy` - Create new slide (non-interactive, for AI)
+- `make preview FILE=workspace/slides/xxx.md` - Preview (non-interactive, for AI)
 - `make build` - Build all formats
 - `make pdf` - Build PDF only (all files)
 - `make pptx` - Build PowerPoint only (all files)

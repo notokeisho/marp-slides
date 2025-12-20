@@ -69,7 +69,8 @@ AI エージェントを使わずに直接コマンドで操作したい場合�
 make install  # セットアップ
 make new      # スライド作成（対話型）
 make new NAME=xxx THEME=yyy  # スライド作成（非対話型）
-make preview  # スライドのプレビュー
+make preview  # スライドのプレビュー（対話型）
+make preview FILE=workspace/slides/xxx.md  # プレビュー（非対話型）
 make build    # ビルド
 ```
 
@@ -92,7 +93,8 @@ make build    # ビルド
 make install              # セットアップ
 make new                  # 新規スライド作成（対話型）
 make new NAME=xxx THEME=yyy  # 新規スライド作成（非対話型）
-make preview              # ブラウザプレビュー
+make preview              # ブラウザプレビュー（対話型）
+make preview FILE=...     # ブラウザプレビュー（非対話型）
 make build                # 全形式ビルド
 make build-one FILE=...   # 単一ファイル全形式ビルド
 make pdf-one FILE=...     # 単一ファイルPDFのみ
