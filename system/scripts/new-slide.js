@@ -18,9 +18,9 @@ async function createNewSlide() {
           if (!input || input.trim() === "") {
             return "Filename cannot be empty";
           }
-          const slidePath = path.join(process.cwd(), "slides", `${input}.md`);
+          const slidePath = path.join(process.cwd(), "workspace/slides", `${input}.md`);
           if (fs.existsSync(slidePath)) {
-            return `slides/${input}.md already exists`;
+            return `workspace/slides/${input}.md already exists`;
           }
           return true;
         },
@@ -28,7 +28,7 @@ async function createNewSlide() {
     ]);
 
     // テーマディレクトリを取得
-    const themesDir = path.join(process.cwd(), "themes");
+    const themesDir = path.join(process.cwd(), "system/themes");
     const themes = fs.readdirSync(themesDir).filter((file) => {
       const stat = fs.statSync(path.join(themesDir, file));
       return stat.isDirectory();
@@ -55,11 +55,11 @@ async function createNewSlide() {
     // テンプレートをコピー
     const templatePath = path.join(
       process.cwd(),
-      "templates",
+      "system/templates",
       theme,
       "template.md"
     );
-    const slidePath = path.join(process.cwd(), "slides", `${filename}.md`);
+    const slidePath = path.join(process.cwd(), "workspace/slides", `${filename}.md`);
 
     if (!fs.existsSync(templatePath)) {
       console.error(`Error: Template not found at ${templatePath}`);
@@ -68,7 +68,7 @@ async function createNewSlide() {
 
     fs.copyFileSync(templatePath, slidePath);
 
-    console.log("\nCreated: slides/" + filename + ".md");
+    console.log("\nCreated: workspace/slides/" + filename + ".md");
     console.log("   Theme: " + theme);
   } catch (error) {
     if (error.isTtyError) {

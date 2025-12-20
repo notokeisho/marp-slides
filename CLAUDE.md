@@ -47,7 +47,7 @@
 
 - **必ず質問する**: 不足情報は推測せず、ユーザーに質問
 - **makeコマンドのみ**: npm等の直接コマンドは使わない
-- **システムファイル保護**: themes/, scripts/, Makefile等は変更しない
+- **システムファイル保護**: system/themes/, system/scripts/, Makefile等は変更しない
 
 ## 基本方針
 
@@ -59,15 +59,15 @@
 - `make pdf` - PDFのみビルド
 - `make pptx` - PowerPointのみビルド
 - `make html` - HTMLのみビルド
-- `make build-one FILE=slides/xxx.md` - 特定のファイルのみビルド
+- `make build-one FILE=workspace/slides/xxx.md` - 特定のファイルのみビルド
 - `make clean` - 生成物の削除
 
 ❌ **使用禁止:**
 - npmコマンドの直接実行
 - ファイルやディレクトリの直接作成・編集・削除
-- テーマファイル (`themes/`) の変更
+- テーマファイル (`system/themes/`) の変更
 - 設定ファイル (`.vscode/`, `.marprc.yml`, `Makefile`) の変更
-- スクリプトファイル (`scripts/`) の変更
+- スクリプトファイル (`system/scripts/`) の変更
 
 ### トラブル時の対応
 
@@ -87,7 +87,7 @@ make new
    - `default` - シンプルな標準テーマ
    - `gradient` - 紫のグラデーションテーマ
    - `darkmode` - ダークモードテーマ
-3. `slides/[filename].md` が自動生成されます
+3. `workspace/slides/[filename].md` が自動生成されます
 
 ### ステップ2: スライドの編集
 
@@ -130,14 +130,14 @@ footer: "フッターテキスト"
 
 ```markdown
 # サイズ指定
-![width:500px](../../assets/image.png)
-![height:300px](../../assets/image.png)
+![width:500px](../img/image.png)
+![height:300px](../img/image.png)
 
 # 背景画像
-![bg](../../assets/background.png)
+![bg](../img/background.png)
 ```
 
-**注意:** 画像パスはMarkdownファイルからの相対パスで指定します。
+**注意:** 画像パスはMarkdownファイルからの相対パスで指定します。`workspace/slides/` から `workspace/img/` への相対パスは `../img/` です。
 
 #### 2カラムレイアウト
 
@@ -201,13 +201,13 @@ make html  # HTMLのみ
 #### 特定のファイルのみビルド
 
 ```bash
-make build-one FILE=slides/my-presentation.md
+make build-one FILE=workspace/slides/my-presentation.md
 ```
 
 **出力先:**
-- PDF: `dist/pdf/[filename].pdf`
-- PPTX: `dist/pptx/[filename].pptx`
-- HTML: `dist/html/[filename].html`
+- PDF: `workspace/output/pdf/[filename].pdf`
+- PPTX: `workspace/output/pptx/[filename].pptx`
+- HTML: `workspace/output/html/[filename].html`
 
 ### ステップ4: 確認
 
@@ -215,9 +215,9 @@ make build-one FILE=slides/my-presentation.md
 
 ```bash
 # macOSの場合
-open dist/pdf/my-presentation.pdf
-open dist/pptx/my-presentation.pptx
-open dist/html/my-presentation.html
+open workspace/output/pdf/my-presentation.pdf
+open workspace/output/pptx/my-presentation.pptx
+open workspace/output/html/my-presentation.html
 ```
 
 ## Claude Codeとの対話例
@@ -247,11 +247,11 @@ open dist/html/my-presentation.html
 
 **ユーザー:**
 ```
-slides/project-report.md の進捗状況セクションに、各項目の進捗率を追加してください。
+workspace/slides/project-report.md の進捗状況セクションに、各項目の進捗率を追加してください。
 ```
 
 **Claude Codeの対応:**
-1. `slides/project-report.md` を読み取り
+1. `workspace/slides/project-report.md` を読み取り
 2. 進捗状況セクションを特定
 3. 各項目に進捗率を追加
 4. 変更内容を報告
@@ -260,12 +260,12 @@ slides/project-report.md の進捗状況セクションに、各項目の進捗�
 
 **ユーザー:**
 ```
-スライド3に画像を追加したい。assets/chart.png を横幅600pxで挿入してください。
+スライド3に画像を追加したい。workspace/img/chart.png を横幅600pxで挿入してください。
 ```
 
 **Claude Codeの対応:**
 1. スライド3を特定
-2. 正しい相対パスで画像を挿入: `![width:600px](../../assets/chart.png)`
+2. 正しい相対パスで画像を挿入: `![width:600px](../img/chart.png)`
 3. 変更内容を報告
 
 ## 利用可能なテーマ
@@ -358,9 +358,9 @@ A: `docs/troubleshooting.md` の「makeコマンドが使えない」セクシ�
 
 以下のファイル・ディレクトリは**絶対に変更しないでください**：
 
-- `themes/` - テーマファイル
-- `templates/` - テンプレートファイル
-- `scripts/` - スクリプトファイル
+- `system/themes/` - テーマファイル
+- `system/templates/` - テンプレートファイル
+- `system/scripts/` - スクリプトファイル
 - `.vscode/` - VS Code設定
 - `.marprc.yml` - Marp CLI設定
 - `Makefile` - ビルド設定
@@ -374,9 +374,9 @@ A: `docs/troubleshooting.md` の「makeコマンドが使えない」セクシ�
 
 ✅ **可能な操作:**
 - 新規スライドの作成 (`make new`)
-- スライド内容の編集 (`slides/` 内のMarkdownファイル)
+- スライド内容の編集 (`workspace/slides/` 内のMarkdownファイル)
 - スライドのビルド (`make build` 等)
-- アセットの追加 (`assets/` 内の画像ファイル)
+- アセットの追加 (`workspace/img/` 内の画像ファイル)
 
 ❌ **禁止されている操作:**
 - 新しいテーマの追加
@@ -407,7 +407,7 @@ A: `docs/troubleshooting.md` の「makeコマンドが使えない」セクシ�
 Claude Codeがスライド作成をサポートする際の原則：
 
 1. **makeコマンドのみを使用** - 直接のnpmコマンドやファイル操作は行わない
-2. **スライドファイルのみを編集** - `slides/` 内のMarkdownファイルと `assets/` 内の画像のみ
+2. **スライドファイルのみを編集** - `workspace/slides/` 内のMarkdownファイルと `workspace/img/` 内の画像のみ
 3. **システムファイルは変更しない** - テーマ、スクリプト、設定ファイルには触れない
 4. **ユーザーの意図を確認** - 不明な点は質問してから実行
 5. **エラー時は適切なドキュメントを案内** - `docs/troubleshooting.md` を参照するよう促す

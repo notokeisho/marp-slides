@@ -20,7 +20,7 @@
 
 ### 「システムを修正して」「スクリプトを変更して」と言われたら
 
-1. 変更対象を確認（scripts/, Makefile, 設定ファイル等）
+1. 変更対象を確認（system/scripts/, Makefile, 設定ファイル等）
 2. 変更内容を確認
 3. 変更を実施
 4. テスト
@@ -39,9 +39,9 @@ npm run [script]          # package.jsonスクリプト実行
 
 ### 編集可能なファイル（開発時のみ）
 
-- `themes/` - テーマCSS
-- `templates/` - テンプレート
-- `scripts/` - Node.jsスクリプト
+- `system/themes/` - テーマCSS
+- `system/templates/` - テンプレート
+- `system/scripts/` - Node.jsスクリプト
 - `.vscode/settings.json` - VS Code設定
 - `.marprc.yml` - Marp CLI設定
 - `Makefile` - ビルド設定
@@ -57,28 +57,30 @@ Marp（Markdown Presentation Ecosystem）スライド管理リポジトリです
 ### ディレクトリ構造の設計思想
 
 ```
-slides/                     # スライドソース（Git管理対象）
-  ├─ example.md
-  └─ presentation.md
-templates/                  # テーマ別テンプレート（Git管理対象）
-  ├─ default/
-  │  └─ template.md
-  ├─ gradient/
-  │  └─ template.md
-  └─ darkmode/
-     └─ template.md
-themes/[theme-name]/        # テーマCSSファイル（Git管理対象）
-  ├─ gradient/
-  │  └─ gradient.css
-  └─ darkmode/
-     └─ darkmode.css
-assets/                     # 共有画像・リソース（Git管理対象）
-dist/                       # 生成物（Git管理対象外）
-  ├─ pdf/
-  ├─ pptx/
-  └─ html/
-scripts/                    # Node.jsスクリプト
-  └─ new-slide.js           # インタラクティブなスライド作成
+workspace/                  # ユーザー作業エリア
+  ├─ slides/               # スライドソース（Git管理対象）
+  │  ├─ example.md
+  │  └─ presentation.md
+  ├─ img/                  # 画像・リソース（Git管理対象）
+  └─ output/               # 生成物（Git管理対象外）
+     ├─ pdf/
+     ├─ pptx/
+     └─ html/
+system/                     # システムファイル
+  ├─ templates/            # テーマ別テンプレート（Git管理対象）
+  │  ├─ default/
+  │  │  └─ template.md
+  │  ├─ gradient/
+  │  │  └─ template.md
+  │  └─ darkmode/
+  │     └─ template.md
+  ├─ themes/               # テーマCSSファイル（Git管理対象）
+  │  ├─ gradient/
+  │  │  └─ gradient.css
+  │  └─ darkmode/
+  │     └─ darkmode.css
+  └─ scripts/              # Node.jsスクリプト
+     └─ new-slide.js       # インタラクティブなスライド作成
 docs/                       # ドキュメント
   ├─ setup.md
   ├─ usage.md
@@ -90,7 +92,7 @@ docs/                       # ドキュメント
   └─ theme-development.md   # テーマ開発手順
 ```
 
-**重要な設計原則**: スライドは`slides/`ディレクトリ直下に配置されます（ユーザーごとのサブディレクトリは作成しません）。
+**重要な設計原則**: スライドは`workspace/slides/`ディレクトリ直下に配置されます（ユーザーごとのサブディレクトリは作成しません）。
 
 ### テーマシステム
 
@@ -102,12 +104,12 @@ docs/                       # ドキュメント
    - テンプレートのみ存在（CSSファイルなし）
    - 使用方法: Front Matterで`theme: default`
 
-2. **gradient** (`themes/gradient/gradient.css`)
+2. **gradient** (`system/themes/gradient/gradient.css`)
    - グラデーションオーバーレイ付き明るい背景
    - 紫色のカラースキーム (#667eea → #764ba2)
    - 使用方法: Front Matterで`theme: gradient`
 
-3. **darkmode** (`themes/darkmode/darkmode.css`)
+3. **darkmode** (`system/themes/darkmode/darkmode.css`)
    - 放射状グラデーション付きダーク背景
    - 青色のカラースキーム (#a5c9ff)
    - Marpの"gaia"テーマをベースにカスタマイズ
@@ -164,7 +166,7 @@ make build                # 全形式ビルド
 make pdf                  # PDFのみ
 make pptx                 # PowerPointのみ
 make html                 # HTMLのみ
-make build-one FILE=slides/example.md  # 単一ファイル
+make build-one FILE=workspace/slides/example.md  # 単一ファイル
 
 # クリーンアップ
 make clean
@@ -175,32 +177,32 @@ make help
 
 ### ビルド動作
 
-- `slides/*.md`を反復処理
+- `workspace/slides/*.md`を反復処理
 - 出力ファイル名: `[filename].[拡張子]`
-- 例: `slides/demo.md` → `dist/pdf/demo.pdf`
+- 例: `workspace/slides/demo.md` → `workspace/output/pdf/demo.pdf`
 
 ## 新しいテーマの追加
 
 詳細は `.claude/theme-development.md` を参照してください。
 
 **概要:**
-1. `themes/new-theme/` ディレクトリ作成
-2. `themes/new-theme/new-theme.css` 作成（`@theme new-theme` ディレクティブ必須）
+1. `system/themes/new-theme/` ディレクトリ作成
+2. `system/themes/new-theme/new-theme.css` 作成（`@theme new-theme` ディレクティブ必須）
 3. `.vscode/settings.json` と `.marprc.yml` に登録
-4. `templates/new-theme/template.md` 作成
+4. `system/templates/new-theme/template.md` 作成
 5. ドキュメント更新（`docs/themes.md`, `README.md`）
 
 ## Gitワークフロー
 
 **コミット対象:**
-- `slides/` 内のMarkdownファイル
-- `templates/` 内のテンプレートファイル
-- `themes/` 内のテーマファイル
-- `assets/` 内の共有画像ファイル
+- `workspace/slides/` 内のMarkdownファイル
+- `workspace/img/` 内の画像ファイル
+- `system/templates/` 内のテンプレートファイル
+- `system/themes/` 内のテーマファイル
 - 設定ファイル（`.vscode/`, `.marprc.yml`, `Makefile`, `package.json`）
 
 **コミット対象外:**
-- `dist/` 内の生成物（PDF, PPTX, HTML）
+- `workspace/output/` 内の生成物（PDF, PPTX, HTML）
 - `node_modules/`
 - OSファイル（`.DS_Store`, `Thumbs.db`）
 
@@ -221,9 +223,9 @@ make help
 
 ### システム設計上の制約
 
-- スライドは `slides/` 直下に配置（サブディレクトリなし）
+- スライドは `workspace/slides/` 直下に配置（サブディレクトリなし）
 - テーマ名とディレクトリ名は一致させる必要がある
-- `scripts/new-slide.js` は自動的に `themes/` から利用可能なテーマを検出
+- `system/scripts/new-slide.js` は自動的に `system/themes/` から利用可能なテーマを検出
 
 ## ドキュメント構成
 

@@ -11,10 +11,10 @@ help:
 	@echo "  make pdf      - Convert all .md to PDF"
 	@echo "  make pptx     - Convert all .md to PowerPoint"
 	@echo "  make html     - Convert all .md to HTML"
-	@echo "  make clean    - Remove all generated files in dist/"
+	@echo "  make clean    - Remove all generated files in workspace/output/"
 	@echo ""
 	@echo "Single file build:"
-	@echo "  make build-one FILE=slides/example.md"
+	@echo "  make build-one FILE=workspace/slides/example.md"
 
 # 必要なツールをインストール
 install:
@@ -35,7 +35,7 @@ check-marp:
 
 # 新規スライド作成
 new:
-	@node scripts/new-slide.js
+	@node system/scripts/new-slide.js
 
 # 全形式ビルド
 build: pdf pptx html
@@ -44,36 +44,36 @@ build: pdf pptx html
 # PDF生成
 pdf: check-marp
 	@echo "Building PDF files..."
-	@mkdir -p dist/pdf
-	@for file in slides/*.md; do \
+	@mkdir -p workspace/output/pdf
+	@for file in workspace/slides/*.md; do \
 		if [ -f "$$file" ]; then \
 			base=$$(basename $$file .md); \
-			echo "  Converting $$file → dist/pdf/$$base.pdf"; \
-			marp --pdf --allow-local-files "$$file" -o "dist/pdf/$$base.pdf"; \
+			echo "  Converting $$file → workspace/output/pdf/$$base.pdf"; \
+			marp --pdf --allow-local-files "$$file" -o "workspace/output/pdf/$$base.pdf"; \
 		fi \
 	done
 
 # PowerPoint生成
 pptx: check-marp
 	@echo "Building PowerPoint files..."
-	@mkdir -p dist/pptx
-	@for file in slides/*.md; do \
+	@mkdir -p workspace/output/pptx
+	@for file in workspace/slides/*.md; do \
 		if [ -f "$$file" ]; then \
 			base=$$(basename $$file .md); \
-			echo "  Converting $$file → dist/pptx/$$base.pptx"; \
-			marp --pptx --allow-local-files "$$file" -o "dist/pptx/$$base.pptx"; \
+			echo "  Converting $$file → workspace/output/pptx/$$base.pptx"; \
+			marp --pptx --allow-local-files "$$file" -o "workspace/output/pptx/$$base.pptx"; \
 		fi \
 	done
 
 # HTML生成
 html: check-marp
 	@echo "Building HTML files..."
-	@mkdir -p dist/html
-	@for file in slides/*.md; do \
+	@mkdir -p workspace/output/html
+	@for file in workspace/slides/*.md; do \
 		if [ -f "$$file" ]; then \
 			base=$$(basename $$file .md); \
-			echo "  Converting $$file → dist/html/$$base.html"; \
-			marp --html --allow-local-files "$$file" -o "dist/html/$$base.html"; \
+			echo "  Converting $$file → workspace/output/html/$$base.html"; \
+			marp --html --allow-local-files "$$file" -o "workspace/output/html/$$base.html"; \
 		fi \
 	done
 
@@ -81,19 +81,19 @@ html: check-marp
 build-one: check-marp
 	@if [ -z "$(FILE)" ]; then \
 		echo "❌ Error: FILE parameter required"; \
-		echo "Usage: make build-one FILE=slides/example.md"; \
+		echo "Usage: make build-one FILE=workspace/slides/example.md"; \
 		exit 1; \
 	fi
 	@echo "Building $(FILE)..."
-	@mkdir -p dist/pdf dist/pptx dist/html
+	@mkdir -p workspace/output/pdf workspace/output/pptx workspace/output/html
 	@base=$$(basename $(FILE) .md); \
-	marp --pdf --allow-local-files "$(FILE)" -o "dist/pdf/$$base.pdf"; \
-	marp --pptx --allow-local-files "$(FILE)" -o "dist/pptx/$$base.pptx"; \
-	marp --html --allow-local-files "$(FILE)" -o "dist/html/$$base.html"; \
-	echo "✅ Built: dist/{pdf,pptx,html}/$$base.*"
+	marp --pdf --allow-local-files "$(FILE)" -o "workspace/output/pdf/$$base.pdf"; \
+	marp --pptx --allow-local-files "$(FILE)" -o "workspace/output/pptx/$$base.pptx"; \
+	marp --html --allow-local-files "$(FILE)" -o "workspace/output/html/$$base.html"; \
+	echo "✅ Built: workspace/output/{pdf,pptx,html}/$$base.*"
 
 # クリーンアップ
 clean:
 	@echo "Cleaning generated files..."
-	rm -rf dist/pdf/* dist/pptx/* dist/html/*
-	@echo "✅ Cleaned dist/ directories"
+	rm -rf workspace/output/pdf/* workspace/output/pptx/* workspace/output/html/*
+	@echo "✅ Cleaned workspace/output/ directories"

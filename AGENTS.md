@@ -47,7 +47,7 @@ Respond to user requests by following the appropriate workflow below.
 
 - **Always ask**: Don't guess missing information, ask the user
 - **make commands only**: Don't use npm or other direct commands
-- **Protect system files**: Never modify themes/, scripts/, Makefile, etc.
+- **Protect system files**: Never modify system/themes/, system/scripts/, Makefile, etc.
 
 ## Core Principles
 
@@ -59,15 +59,15 @@ Respond to user requests by following the appropriate workflow below.
 - `make pdf` - Build PDF only
 - `make pptx` - Build PowerPoint only
 - `make html` - Build HTML only
-- `make build-one FILE=slides/xxx.md` - Build specific file
+- `make build-one FILE=workspace/slides/xxx.md` - Build specific file
 - `make clean` - Clean generated files
 
 ❌ **Forbidden:**
 - Direct npm commands
 - Direct file/directory creation, editing, or deletion
-- Modifying theme files (`themes/`)
+- Modifying theme files (`system/themes/`)
 - Modifying config files (`.vscode/`, `.marprc.yml`, `Makefile`)
-- Modifying script files (`scripts/`)
+- Modifying script files (`system/scripts/`)
 
 ### Troubleshooting
 
@@ -87,7 +87,7 @@ make new
    - `default` - Simple standard theme
    - `gradient` - Purple gradient theme
    - `darkmode` - Dark mode theme
-3. File `slides/[filename].md` will be auto-generated
+3. File `workspace/slides/[filename].md` will be auto-generated
 
 ### Step 2: Edit Slide Content
 
@@ -130,11 +130,11 @@ Three horizontal lines (`---`) start a new slide.
 
 ```markdown
 # Size specification
-![width:500px](../../assets/image.png)
-![height:300px](../../assets/image.png)
+![width:500px](../img/image.png)
+![height:300px](../img/image.png)
 
 # Background image
-![bg](../../assets/background.png)
+![bg](../img/background.png)
 ```
 
 **Note:** Image paths are relative to the Markdown file.
@@ -201,13 +201,13 @@ make html  # HTML only
 #### Build Specific File
 
 ```bash
-make build-one FILE=slides/my-presentation.md
+make build-one FILE=workspace/slides/my-presentation.md
 ```
 
 **Output Locations:**
-- PDF: `dist/pdf/[filename].pdf`
-- PPTX: `dist/pptx/[filename].pptx`
-- HTML: `dist/html/[filename].html`
+- PDF: `workspace/output/pdf/[filename].pdf`
+- PPTX: `workspace/output/pptx/[filename].pptx`
+- HTML: `workspace/output/html/[filename].html`
 
 ### Step 4: Verify
 
@@ -215,9 +215,9 @@ Check the generated files.
 
 ```bash
 # On macOS
-open dist/pdf/my-presentation.pdf
-open dist/pptx/my-presentation.pptx
-open dist/html/my-presentation.html
+open workspace/output/pdf/my-presentation.pdf
+open workspace/output/pptx/my-presentation.pptx
+open workspace/output/html/my-presentation.html
 ```
 
 ## Interaction Examples
@@ -247,11 +247,11 @@ Use the gradient theme.
 
 **User:**
 ```
-Add progress percentages to each item in the progress status section of slides/project-report.md.
+Add progress percentages to each item in the progress status section of workspace/slides/project-report.md.
 ```
 
 **Agent Actions:**
-1. Read `slides/project-report.md`
+1. Read `workspace/slides/project-report.md`
 2. Identify progress status section
 3. Add progress percentages to each item
 4. Report changes made
@@ -260,12 +260,12 @@ Add progress percentages to each item in the progress status section of slides/p
 
 **User:**
 ```
-Add an image to slide 3. Insert assets/chart.png with 600px width.
+Add an image to slide 3. Insert workspace/img/chart.png with 600px width.
 ```
 
 **Agent Actions:**
 1. Identify slide 3
-2. Insert image with correct relative path: `![width:600px](../../assets/chart.png)`
+2. Insert image with correct relative path: `![width:600px](../img/chart.png)`
 3. Report changes made
 
 ## Available Themes
@@ -358,9 +358,9 @@ A: Refer to "make command doesn't work" section in `docs/troubleshooting.md`. Ma
 
 **NEVER modify these files/directories:**
 
-- `themes/` - Theme files
-- `templates/` - Template files
-- `scripts/` - Script files
+- `system/themes/` - Theme files
+- `system/templates/` - Template files
+- `system/scripts/` - Script files
 - `.vscode/` - VS Code configuration
 - `.marprc.yml` - Marp CLI configuration
 - `Makefile` - Build configuration
@@ -374,9 +374,9 @@ This system is designed for the following purposes only:
 
 ✅ **Allowed Operations:**
 - Creating new slides (`make new`)
-- Editing slide content (Markdown files in `slides/`)
+- Editing slide content (Markdown files in `workspace/slides/`)
 - Building slides (`make build`, etc.)
-- Adding assets (image files in `assets/`)
+- Adding assets (image files in `workspace/img/`)
 
 ❌ **Forbidden Operations:**
 - Adding new themes
@@ -407,7 +407,7 @@ If problems occur, refer to these documents:
 Principles for AI agents when supporting slide creation:
 
 1. **Use make commands only** - No direct npm commands or file operations
-2. **Edit slide files only** - Only Markdown files in `slides/` and images in `assets/`
+2. **Edit slide files only** - Only Markdown files in `workspace/slides/` and images in `workspace/img/`
 3. **Don't modify system files** - Don't touch themes, scripts, or configuration files
 4. **Confirm user intent** - Ask questions before execution when unclear
 5. **Guide to appropriate docs on error** - Direct users to `docs/troubleshooting.md`

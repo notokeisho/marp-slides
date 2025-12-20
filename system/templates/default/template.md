@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: gradient
+theme: default
 paginate: true
 header: ""
 footer: ""
@@ -41,7 +41,7 @@ footer: ""
 
 ## 画像の挿入
 
-![width:500px](../../assets/sample.png)
+![width:500px](../img/sample.png)
 
 <!-- サイズ指定: width:XXXpx または height:XXXpx -->
 <!-- 背景画像: ![bg](path/to/image.png) -->
@@ -99,16 +99,6 @@ def hello_world():
 
 ---
 
-<!-- _class: gradient -->
-
-## 強調スライド
-
-このスライドは全面グラデーション背景で強調されます。
-
-重要なメッセージを伝えるときに使用します。
-
----
-
 ## まとめ
 
 - ポイント 1 のまとめ
@@ -117,7 +107,7 @@ def hello_world():
 
 ---
 
-<!-- _class: end -->
+<!-- _class: ending -->
 
 # ご清聴ありがとうございました
 

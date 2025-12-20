@@ -94,13 +94,15 @@ make help                 # ヘルプ表示
 
 ```
 marp-slides/
-├─ slides/        # スライドソース（.md）
-├─ templates/     # テーマ別テンプレート
-├─ themes/        # カスタムテーマCSS
-├─ assets/        # 共有画像・リソース
-├─ dist/          # 生成物（Git管理外）
-├─ docs/          # ドキュメント
-└─ scripts/       # ビルドスクリプト
+├─ workspace/     # ユーザー作業エリア
+│  ├─ slides/     # スライドソース（.md）
+│  ├─ img/        # 画像・リソース
+│  └─ output/     # 生成物（Git管理外）
+├─ system/        # システムファイル
+│  ├─ themes/     # カスタムテーマCSS
+│  ├─ templates/  # テーマ別テンプレート
+│  └─ scripts/    # ビルドスクリプト
+└─ docs/          # ドキュメント
 ```
 
 詳細は[アーキテクチャガイド](docs/architecture.md)を参照。
