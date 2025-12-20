@@ -15,9 +15,11 @@ graph LR
 
 上記のように書くと、コードブロックとして表示されてしまいます。
 
-## 解決方法：画像に変換
+## 解決方法：SVG に変換
 
-Mermaid 図を PNG 画像に変換してからスライドに挿入します。
+Mermaid 図を SVG 画像に変換してからスライドに挿入します。
+
+SVG（ベクター形式）を使用するため、どんなサイズでも鮮明に表示されます。
 
 ### ステップ 1: .mmd ファイルを作成
 
@@ -36,18 +38,18 @@ graph LR
     C -->|git push| D[リモートリポジトリ]
 ```
 
-### ステップ 2: PNG に変換
+### ステップ 2: SVG に変換
 
 ```bash
 make mermaid FILE=workspace/img/workflow.mmd
 ```
 
-これで `workspace/img/workflow.png` が生成されます。
+これで `workspace/img/workflow.svg` が生成されます。
 
 ### ステップ 3: スライドに挿入
 
 ```markdown
-![width:600px](../img/workflow.png)
+![width:600px](../img/workflow.svg)
 ```
 
 ## Mermaid 記法の例
@@ -100,7 +102,7 @@ pie title 売上構成
 # 単一ファイルを変換
 make mermaid FILE=workspace/img/diagram.mmd
 
-# 出力: workspace/img/diagram.png
+# 出力: workspace/img/diagram.svg
 ```
 
 ## トラブルシューティング

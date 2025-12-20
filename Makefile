@@ -165,7 +165,7 @@ clean:
 	rm -rf workspace/output/pdf/* workspace/output/pptx/* workspace/output/html/*
 	@echo "✅ Cleaned workspace/output/ directories"
 
-# Mermaid図をPNGに変換
+# Mermaid図をSVGに変換
 mermaid:
 	@if [ -z "$(FILE)" ]; then \
 		echo "❌ Error: FILE parameter required"; \
@@ -180,7 +180,7 @@ mermaid:
 		echo "❌ File not found: $(FILE)"; \
 		exit 1; \
 	fi
-	@echo "🎨 Converting Mermaid to PNG..."
-	@output=$$(echo "$(FILE)" | sed 's/\.mmd$$/.png/'); \
-	npx mmdc -i "$(FILE)" -o "$$output" -b transparent; \
+	@echo "🎨 Converting Mermaid to SVG..."
+	@output=$$(echo "$(FILE)" | sed 's/\.mmd$$/.svg/'); \
+	npx mmdc -i "$(FILE)" -o "$$output"; \
 	echo "✅ Created: $$output"

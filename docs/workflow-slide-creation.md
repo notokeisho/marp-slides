@@ -231,14 +231,14 @@ make build-one FILE=workspace/slides/[ファイル名].md
 **許可される図形生成：**
 
 - 基本図形（四角、三角、丸など）
-- フローチャート（Mermaid → PNG 変換が必要）
-- ダイアグラム（Mermaid → PNG 変換が必要）
+- フローチャート（Mermaid → SVG 変換が必要）
+- ダイアグラム（Mermaid → SVG 変換が必要）
 
 **Mermaid 図の使い方：**
 
 1. `workspace/img/diagram.mmd` に Mermaid 記法で図を作成
-2. `make mermaid FILE=workspace/img/diagram.mmd` で PNG に変換
-3. スライドに `![](../img/diagram.png)` で挿入
+2. `make mermaid FILE=workspace/img/diagram.mmd` で SVG に変換
+3. スライドに `![](../img/diagram.svg)` で挿入
 
 詳細: [Mermaid ガイド](mermaid.md)
 
