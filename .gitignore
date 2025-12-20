@@ -1,12 +1,12 @@
 # Marp生成物
-dist/pdf/*
-dist/pptx/*
-dist/html/*
+workspace/output/pdf/*
+workspace/output/pptx/*
+workspace/output/html/*
 
 # .gitkeepは残す
-!dist/pdf/.gitkeep
-!dist/pptx/.gitkeep
-!dist/html/.gitkeep
+!workspace/output/pdf/.gitkeep
+!workspace/output/pptx/.gitkeep
+!workspace/output/html/.gitkeep
 
 # Node modules (Marp CLI)
 node_modules/

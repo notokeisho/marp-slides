@@ -15,7 +15,7 @@ make new
    - default
    - gradient
    - darkmode
-3. `slides/[filename].md` が自動生成されます
+3. `workspace/slides/[filename].md` が自動生成されます
 
 ### 手動作成
 
@@ -23,7 +23,7 @@ make new
 
 ```bash
 # 例：Gradientテーマを使う場合
-cp templates/gradient/template.md slides/my-presentation.md
+cp system/templates/gradient/template.md workspace/slides/my-presentation.md
 ```
 
 ## スライドの編集
@@ -94,14 +94,14 @@ footer: "フッターテキスト"
 
 ```markdown
 # サイズ指定
-![width:500px](../../assets/image.png)
-![height:300px](../../assets/image.png)
+![width:500px](../img/image.png)
+![height:300px](../img/image.png)
 
 # 背景画像
-![bg](../../assets/background.png)
+![bg](../img/background.png)
 ```
 
-**注意**: 画像パスは Markdown ファイルからの相対パスで指定します。
+**注意**: 画像パスは Markdown ファイルからの相対パスで指定します。`workspace/slides/` から `workspace/img/` への相対パスは `../img/` です。
 
 ### 2 カラムレイアウト
 
@@ -166,14 +166,14 @@ make html
 
 **出力先:**
 
-- PDF: `dist/pdf/[filename].pdf`
-- PPTX: `dist/pptx/[filename].pptx`
-- HTML: `dist/html/[filename].html`
+- PDF: `workspace/output/pdf/[filename].pdf`
+- PPTX: `workspace/output/pptx/[filename].pptx`
+- HTML: `workspace/output/html/[filename].html`
 
 ### 特定のファイルだけビルド
 
 ```bash
-make build-one FILE=slides/presentation.md
+make build-one FILE=workspace/slides/presentation.md
 ```
 
 すべての形式（PDF, PPTX, HTML）が生成されます。
@@ -184,7 +184,7 @@ make build-one FILE=slides/presentation.md
 make clean
 ```
 
-`dist/` 内のすべての生成ファイルを削除します。
+`workspace/output/` 内のすべての生成ファイルを削除します。
 
 ## VS Code でのプレビュー
 

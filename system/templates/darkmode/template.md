@@ -41,7 +41,7 @@ footer: ""
 
 ## 画像の挿入
 
-![width:500px](../../assets/sample.png)
+![width:500px](../img/sample.png)
 
 <!-- サイズ指定: width:XXXpx または height:XXXpx -->
 <!-- 背景画像: ![bg](path/to/image.png) -->
