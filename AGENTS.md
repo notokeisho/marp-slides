@@ -51,11 +51,38 @@ Respond to user requests by following the appropriate workflow below.
 4. Edits auto-refresh on save
 5. Stop with Ctrl+C
 
+### When user says "Add image"
+
+1. Confirm image source (URL or user-provided file)
+2. Download/copy to `workspace/img/`
+3. Confirm with user: "Is this image OK?"
+4. If OK, insert into Markdown:
+   ```markdown
+   <!-- Source: https://example.com/page -->
+   ![description](../img/image-name.png)
+   ```
+5. Rebuild
+
 ### Key Principles
 
 - **Always ask**: Don't guess missing information, ask the user
 - **make commands only**: Don't use npm or other direct commands
 - **Protect system files**: Never modify system/themes/, system/scripts/, Makefile, etc.
+- **Confirm images**: Always confirm with user before adding images
+
+### Image Handling Rules
+
+✅ **Allowed:**
+- User-provided image files
+- User-specified URL images
+- Basic shapes (rectangles, triangles, circles)
+- Flowcharts (Mermaid syntax)
+- Diagrams (Mermaid syntax)
+
+❌ **Forbidden:**
+- AI image generation (DALL-E, etc.)
+- Auto-fetching stock images (Unsplash, etc.)
+- Adding images without user instruction
 
 ## Core Principles
 

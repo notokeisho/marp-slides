@@ -53,7 +53,27 @@
 
 **ユーザーの回答を待つ**
 
-### ステップ 4: スライドファイル作成
+### ステップ 4: 画像について確認
+
+```
+スライドに画像を含めますか？
+
+- Yes → 画像のURLまたはファイルを教えてください
+- No → スキップして次に進みます
+
+※ 注意: AI画像生成やストック画像の自動取得は行いません。
+  お持ちの画像やURLを指定してください。
+```
+
+**画像が必要な場合：**
+1. ユーザーから画像URL or ファイルパスを受け取る
+2. `workspace/img/` にダウンロード/コピー
+3. 「この画像でいいですか？」と確認
+4. OKなら次のステップへ
+
+**画像不要の場合：** 次のステップへ進む
+
+### ステップ 5: スライドファイル作成
 
 `make new` コマンドを実行します。
 
@@ -65,19 +85,25 @@ make new
 1. ファイル名 → ステップ1でユーザーが指定した名前を入力
 2. テーマ選択 → ステップ2でユーザーが選んだテーマを選択
 
-### ステップ 5: スライド内容の編集
+### ステップ 6: スライド内容の編集
 
-生成された `slides/[ファイル名].md` を開き、ユーザーが指定した内容に基づいてMarkdownを編集します。
+生成された `workspace/slides/[ファイル名].md` を開き、ユーザーが指定した内容に基づいてMarkdownを編集します。
 
 **編集のポイント：**
 - タイトルスライドには `<!-- _class: title -->` を使用
 - スライドは `---` で区切る
-- 画像は `![width:500px](../../assets/image.png)` 形式
+- 画像は `![width:500px](../img/image.png)` 形式
 - 箇条書き、表、コードブロックなど適切に活用
+
+**画像を含める場合：**
+```markdown
+<!-- 出典: https://example.com/page -->
+![説明文](../img/downloaded-image.png)
+```
 
 **Markdown構文の参考：** [使い方ガイド](usage.md)
 
-### ステップ 6: ビルド実行
+### ステップ 7: ビルド実行
 
 ```bash
 make build
@@ -86,21 +112,21 @@ make build
 または、単一ファイルのみビルドする場合：
 
 ```bash
-make build-one FILE=slides/[ファイル名].md
+make build-one FILE=workspace/slides/[ファイル名].md
 ```
 
-### ステップ 7: 完了報告
+### ステップ 8: 完了報告
 
 ```
 ✅ スライドが完成しました！
 
 生成されたファイル：
-- PDF: dist/pdf/[ファイル名].pdf
-- PowerPoint: dist/pptx/[ファイル名].pptx
-- HTML: dist/html/[ファイル名].html
+- PDF: workspace/output/pdf/[ファイル名].pdf
+- PowerPoint: workspace/output/pptx/[ファイル名].pptx
+- HTML: workspace/output/html/[ファイル名].html
 
 確認するには以下のコマンドを実行してください：
-open dist/pdf/[ファイル名].pdf
+open workspace/output/pdf/[ファイル名].pdf
 
 修正が必要な場合は、お知らせください。
 ```
@@ -111,20 +137,35 @@ open dist/pdf/[ファイル名].pdf
 
 1. 対象ファイルを確認（不明なら質問）
 2. 修正内容を確認（不明なら質問）
-3. `slides/[ファイル名].md` を編集
+3. `workspace/slides/[ファイル名].md` を編集
 4. `make build` で再ビルド
 5. 変更内容を報告
 
 ### 「画像を追加して」
 
-1. 画像ファイルの場所を確認
-2. `assets/` に画像がある場合：`![width:500px](../../assets/画像名.png)`
-3. Markdownに画像を挿入
-4. 再ビルド
+1. 画像ソースを確認（URL or ユーザー提供ファイル）
+2. `workspace/img/` にダウンロード/コピー
+3. 「この画像でいいですか？」と確認
+4. Markdownに画像を挿入：
+   ```markdown
+   <!-- 出典: https://example.com/page -->
+   ![説明文](../img/画像名.png)
+   ```
+5. 再ビルド
+
+**禁止事項：**
+- AI画像生成（DALL-E等）は使用しない
+- ストック画像の自動取得（Unsplash等）は行わない
+- ユーザーの指示なしに画像を追加しない
+
+**許可される図形生成：**
+- 基本図形（四角、三角、丸など）
+- フローチャート（Mermaid記法）
+- ダイアグラム（Mermaid記法）
 
 ### 「テーマを変えて」
 
-1. `slides/[ファイル名].md` のFront Matterを編集
+1. `workspace/slides/[ファイル名].md` のFront Matterを編集
 2. `theme:` の値を変更（default / gradient / darkmode）
 3. 再ビルド
 
@@ -165,5 +206,6 @@ open dist/pdf/[ファイル名].pdf
 
 - **必ず質問する**: ファイル名、テーマ、内容は推測せず必ず質問
 - **makeコマンドのみ使用**: npm等の直接コマンドは使わない
-- **スライドファイルのみ編集**: `slides/` と `assets/` 以外は編集しない
-- **システムファイル保護**: themes/, scripts/, Makefile等は絶対に変更しない
+- **スライドファイルのみ編集**: `workspace/slides/` と `workspace/img/` 以外は編集しない
+- **システムファイル保護**: system/themes/, system/scripts/, Makefile等は絶対に変更しない
+- **画像は確認必須**: 画像を追加する前に必ずユーザーに確認する
