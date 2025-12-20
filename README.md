@@ -3,13 +3,42 @@
 Marp（Markdown Presentation Ecosystem）を使ったスライド管理リポジトリ。
 Markdown でスライドを書き、PDF/PowerPoint/HTML に自動変換します。
 
-## ✨ 特徴
+## 🎨 テーマ
 
-- 📝 **Markdown でスライド作成** - シンプルな記法で美しいプレゼンテーション
-- 🎨 **3 つのテーマ** - Default, Gradient, Darkmode から選択
-- 🚀 **インタラクティブ CLI** - Next.js ライクな UI でスライド作成
-- 📦 **自動ビルド** - PDF, PowerPoint, HTML を一括生成
-- 🔧 **VS Code 統合** - リアルタイムプレビュー
+<details open>
+<summary><strong>Default</strong> - シンプルで汎用的</summary>
+
+<br>
+
+![Default Theme](docs/images/theme-default.png)
+
+Marp標準テーマ。ミニマルデザインでビジネス用途に最適。
+
+</details>
+
+<details>
+<summary><strong>Gradient</strong> - 華やかなグラデーション</summary>
+
+<br>
+
+![Gradient Theme](docs/images/theme-gradient.png)
+
+紫色のグラデーション (#667eea → #764ba2)。クリエイティブなプレゼンテーションに。
+
+</details>
+
+<details>
+<summary><strong>Darkmode</strong> - モダンなダークモード</summary>
+
+<br>
+
+![Darkmode Theme](docs/images/theme-darkmode.png)
+
+目に優しいダーク背景。技術系プレゼンテーションに。
+
+</details>
+
+詳細は[テーマガイド](docs/themes.md)を参照。
 
 ## 🚀 クイックスタート
 
@@ -46,31 +75,6 @@ make build    # ビルド
 - [セットアップガイド](docs/setup.md)
 - [使い方ガイド](docs/usage.md)
 
-## 🎨 利用可能なテーマ
-
-### Default
-
-Marp 標準テーマ。シンプルで汎用的。
-
-- ミニマルデザイン
-- ビジネス用途に最適
-
-### Gradient
-
-華やかなグラデーションテーマ。
-
-- 紫色のグラデーション (#667eea → #764ba2)
-- クリエイティブなプレゼンテーションに
-
-### Darkmode
-
-モダンなダークモードテーマ。
-
-- 目に優しいダーク背景
-- 技術系プレゼンテーションに
-
-詳細は[テーマガイド](docs/themes.md)を参照。
-
 ## 📚 ドキュメント
 
 - **[セットアップガイド](docs/setup.md)** - 詳細なインストール手順
@@ -84,6 +88,7 @@ Marp 標準テーマ。シンプルで汎用的。
 ```bash
 make install              # セットアップ
 make new                  # 新規スライド作成
+make preview              # ブラウザプレビュー
 make build                # 全形式ビルド
 make build-one FILE=...   # 単一ファイルビルド
 make clean                # 生成物削除
@@ -110,5 +115,5 @@ marp-slides/
 ## 🤝 コントリビューション
 
 1. `make new` でスライドを作成して編集
-2. 新しいテーマを追加する場合は `themes/new-theme/` を作成して PR
+2. 新しいテーマを追加する場合は `system/themes/new-theme/` を作成して PR
 3. テンプレートを改善する場合は各テーマのテンプレートを編集して PR
