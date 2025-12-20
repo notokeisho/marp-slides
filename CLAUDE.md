@@ -10,7 +10,7 @@
 
 ## 重要
 
-- ユーザが Coding Agent を実行前に必ず、`docs/important-key.md`を確認してください。
+- ユーザ実行前に必ず、`docs/important-key.md`を確認してください。
 
 ## 🤖 ユーザーリクエスト対応フロー
 
@@ -169,6 +169,7 @@ section.custom-slide {
 - テーマファイル (`system/themes/`) の変更
 - 設定ファイル (`.vscode/`, `.marprc.yml`, `Makefile`) の変更
 - スクリプトファイル (`system/scripts/`) の変更
+- **`.env` ファイルの作成・編集・削除（絶対禁止）**
 
 ### トラブル時の対応
 

@@ -10,7 +10,7 @@ This file provides guidance for Gemini CLI when creating slides in this reposito
 
 ## 重要
 
-- ユーザが Coding Agent を実行前に必ず、`docs/important-key.md`を確認してください。
+- ユーザ実行前に必ず、`docs/important-key.md`を確認してください。
 
 ## 🤖 User Request Response Flow
 
