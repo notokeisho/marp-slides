@@ -13,41 +13,38 @@ Markdown でスライドを書き、PDF/PowerPoint/HTML に自動変換します
 
 ## 🚀 クイックスタート
 
-### 1. セットアップ
+### AIエージェントが使える方（推奨）
+
+AIエージェント（Claude Code, Cursor, GitHub Copilot CLI 等）に以下のようにお願いするだけで、自動で進めてくれます：
+
+| お願いする内容 | AIがやってくれること |
+|---------------|---------------------|
+| 「セットアップして」 | 環境構築を自動実行 |
+| 「スライド作成して」 | 質問しながらスライドを作成 |
+| 「ビルドして」 | PDF/PPTX/HTMLを生成 |
+
+エージェントがファイル名、テーマ、内容などを質問してくれるので、答えるだけでスライドが完成します。
+
+### AIエージェントのセットアップがまだの方
+
+→ **[AIエージェントセットアップガイド](docs/ai-agent-setup.md)**
+
+各AIエージェントのインストール方法を解説しています。
+セットアップ後、上記の「AIエージェントが使える方」の手順に進んでください。
+
+### 手動でコマンドを実行したい方
+
+AIエージェントを使わずに直接コマンドで操作したい場合：
 
 ```bash
-# リポジトリをクローン
-git clone git@github.com:notokeisho/marp-slides.gits
-cd marp-slides
-
-# 依存パッケージをインストール
-make install
+make install  # セットアップ
+make new      # スライド作成
+make build    # ビルド
 ```
 
-### 2. スライド作成
-
-```bash
-# インタラクティブに新規スライド作成
-make new
-```
-
-1. ファイル名を入力
-2. テーマを選択（矢印キーで選択）
-3. `slides/[filename].md` が自動生成
-
-### 3. ビルド
-
-```bash
-# すべての形式（PDF, PPTX, HTML）でビルド
-make build
-
-# 特定の形式のみ
-make pdf    # PDFのみ
-make pptx   # PowerPointのみ
-make html   # HTMLのみ
-```
-
-**出力先**: `dist/pdf/`, `dist/pptx/`, `dist/html/`
+詳細は以下を参照してください：
+- [セットアップガイド](docs/setup.md)
+- [使い方ガイド](docs/usage.md)
 
 ## 🎨 利用可能なテーマ
 
