@@ -29,3 +29,6 @@ Thumbs.db
 
 # Claude Code
 .claude/plan
+
+# Developer authentication (do not commit)
+.env
